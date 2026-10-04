@@ -1,0 +1,15 @@
+{
+  "name": "ecotrack-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "start:server": "npm --prefix server run start",
+    "start:client": "npm --prefix client run dev",
+    "build:client": "npm --prefix client run build",
+    "serve:website": "npx -y serve ."
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}

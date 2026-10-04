@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoTrack — Environmental Action & Issue Management Platform</title>
+  <meta name="description" content="EcoTrack is an Environmental Action & Issue Management Platform for colleges and organizations. Track verified activities, report environmental hazards, and measure collective impact.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2322c55e'><path d='M11 20A7 7 0 0 1 4 13c0-4.418 3.582-8 8-8 1.05 0 2.05.203 2.96.572C15.688 2.22 18.667 0 22 0c0 4.418-3.582 8-8 8-.507 0-1-.048-1.474-.141C12.193 9.07 12 10.495 12 12c0 2.21 1.79 4 4 4v2a6 6 0 0 1-5 2z'/></svg>">
+
+  <!-- Google Fonts: Outfit for futuristic headings & Inter for UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       EcoTrack Cinematic Environmental-Tech SaaS Design System
+       ========================================================================== */
+    :root {
+      --bg-dark: #05100a;
+      --bg-dark-secondary: #07170f;
+      --bg-dark-card: rgba(8, 22, 15, 0.78);
+      --bg-dark-glass: rgba(7, 20, 14, 0.65);
+      --bg-dark-input: rgba(4, 14, 9, 0.85);
+
+      --accent-neon: #22c55e;
+      --accent-lime: #4ade80;
+      --accent-bright: #39e75f;
+      --accent-emerald: #10b981;
+      --accent-glow: rgba(34, 197, 94, 0.4);
+      --accent-glow-strong: rgba(74, 222, 128, 0.65);
+
+      --border-glass: rgba(74, 222, 128, 0.22);
+      --border-glass-hover: rgba(74, 222, 128, 0.55);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+
+      --text-main: #f0fdf4;
+      --text-secondary: #a7f3d0;
+      --text-muted: #86a294;
+
+      --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-xl: 32px;
+      --radius-full: 9999px;
+
+      --shadow-glow: 0 0 35px rgba(34, 197, 94, 0.3);
+      --shadow-card: 0 24px 48px -12px rgba(0, 0, 0, 0.75), 0 0 25px rgba(34, 197, 94, 0.12);
+      --shadow-btn: 0 4px 22px rgba(34, 197, 94, 0.5);
+
+      --transition-fast: 0.18s ease;
+      --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body.light-theme {
+      --bg-dark: #f0fdf4;
+      --bg-dark-secondary: #dcfce7;
+      --bg-dark-card: rgba(255, 255, 255, 0.94);
+      --bg-dark-glass: rgba(255, 255, 255, 0.88);
+      --bg-dark-input: rgba(240, 253, 244, 0.95);
+      --border-glass: rgba(22, 163, 74, 0.28);
+      --border-glass-hover: rgba(22, 163, 74, 0.6);
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --text-main: #064e3b;
+      --text-secondary: #047857;
+      --text-muted: #4b5563;
+      --shadow-card: 0 15px 35px -10px rgba(0, 70, 30, 0.12), 0 0 15px rgba(34, 197, 94, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      font-family: var(--font-body);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      letter-spacing: -0.025em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(3, 11, 7, 0.9);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(34, 197, 94, 0.35);
+      border-radius: var(--radius-full);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(74, 222, 128, 0.65);
+    }
+
+    /* Glassmorphism Classes */
+    .glass-panel {
+      background: var(--bg-dark-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      box-shadow: var(--shadow-card);
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth), transform var(--transition-smooth);
+    }
+
+    .glass-panel:hover {
+      border-color: var(--border-glass-hover);
+      box-shadow: var(--shadow-card), 0 0 25px rgba(34, 197, 94, 0.2);
+    }
+
+    .glass-pill {
+      background: rgba(8, 24, 16, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      transition: all var(--transition-fast);
+      color: #ffffff;
+      cursor: pointer;
+    }
+    .glass-pill:hover {
+      border-color: var(--border-glass-hover);
+      box-shadow: 0 0 16px rgba(74, 222, 128, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary-gradient {
+      background: linear-gradient(135deg, #4ade80 0%, #22c55e 55%, #15803d 100%);
+      color: #042413;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: var(--radius-full);
+      padding: 12px 26px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: var(--shadow-btn);
+      transition: all var(--transition-smooth);
+    }
+    .btn-primary-gradient:hover {
+      box-shadow: 0 6px 26px rgba(74, 222, 128, 0.65);
+      transform: translateY(-2px);
+    }
+    .btn-primary-gradient:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary-glass {
+      background: rgba(14, 38, 25, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(74, 222, 128, 0.35);
+      color: #f0fdf4;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      padding: 12px 24px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all var(--transition-smooth);
+    }
+    .btn-secondary-glass:hover {
+      background: rgba(22, 54, 36, 0.9);
+      border-color: #4ade80;
+      color: #ffffff;
+      box-shadow: 0 0 18px rgba(74, 222, 128, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .text-gradient-green {
+      background: linear-gradient(135deg, #86efac 0%, #4ade80 40%, #22c55e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 25px rgba(74, 222, 128, 0.45));
+    }
+
+    .input-field {
+      width: 100%;
+      background: var(--bg-dark-input);
+      border: 1px solid rgba(74, 222, 128, 0.25);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      font-family: var(--font-body);
+    }
+    .input-field:focus {
+      border-color: #4ade80;
+      box-shadow: 0 0 14px rgba(74, 222, 128, 0.3);
+    }
+
+    /* Keyframe Animations */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.85; transform: translate(-50%, -50%) scale(1.08); }
+    }
+    @keyframes floatGlobe {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes orbitSpin1 {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes orbitSpin2 {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+    @keyframes badgeBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes toastFade {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================================================================
+       TOP NAVBAR (Clean, transparent, minimal)
+       ======================================================================== */
+    .app-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: rgba(5, 16, 10, 0.72);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(74, 222, 128, 0.14);
+      height: 72px;
+      display: flex;
+      align-items: center;
+      padding: 0 44px;
+      justify-content: space-between;
+      transition: background 0.3s ease;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+    .nav-logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #22c55e, #15803d);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 16px rgba(34, 197, 94, 0.45);
+    }
+    .nav-brand-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-link-item {
+      background: transparent;
+      border: none;
+      color: rgba(240, 253, 244, 0.78);
+      font-size: 0.92rem;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-link-item:hover {
+      color: #ffffff;
+      background: rgba(34, 197, 94, 0.14);
+    }
+    .nav-link-item.active {
+      color: #ffffff;
+      background: rgba(34, 197, 94, 0.22);
+      border: 1px solid rgba(74, 222, 128, 0.35);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* ========================================================================
+       HERO SECTION — CINEMATIC WIDE VIEW MATCHING SECOND SCREENSHOT
+       ======================================================================== */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 105px 44px 36px;
+      overflow: hidden;
+      background-color: var(--bg-dark);
+    }
+
+    .hero-bg-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .hero-forest {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('assets/forest-bg.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      opacity: 0.85;
+      filter: brightness(0.62) contrast(1.18);
+    }
+    .hero-vignette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 72% 50%, rgba(34, 197, 94, 0.18) 0%, transparent 65%),
+                  linear-gradient(to right, rgba(4, 14, 9, 0.96) 0%, rgba(4, 14, 9, 0.82) 42%, rgba(4, 14, 9, 0.5) 75%, rgba(4, 14, 9, 0.9) 100%),
+                  linear-gradient(to bottom, rgba(4, 14, 9, 0.8) 0%, transparent 20%, transparent 75%, rgba(4, 14, 9, 0.98) 100%);
+    }
+
+    #hero-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Large Cinematic Hero Split Grid */
+    .hero-container {
+      max-width: 1380px;
+      width: 100%;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.15fr 1.05fr;
+      align-items: center;
+      gap: 40px;
+      z-index: 5;
+      position: relative;
+      flex: 1;
+    }
+
+    .hero-text-col {
+      max-width: 660px;
+      padding-right: 20px;
+    }
+
+    .hero-eyebrow {
+      color: #86efac;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 10px #4ade80;
+    }
+
+    .hero-headline {
+      font-size: 4.8rem;
+      font-weight: 900;
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      margin-bottom: 24px;
+      color: #ffffff;
+    }
+
+    .hero-description {
+      color: rgba(240, 253, 244, 0.82);
+      font-size: 1.18rem;
+      line-height: 1.6;
+      margin-bottom: 36px;
+      max-width: 520px;
+      font-weight: 400;
+    }
+
+    /* 4 Hero Action Pills */
+    .hero-action-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 320px;
+    }
+
+    .hero-action-pill {
+      padding: 13px 20px;
+      width: 100%;
+      border-radius: var(--radius-full);
+      background: rgba(8, 26, 17, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(74, 222, 128, 0.32);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: #ffffff;
+      font-size: 0.98rem;
+      font-weight: 600;
+      transition: all var(--transition-fast);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+    }
+    .hero-action-pill:hover {
+      background: rgba(14, 40, 26, 0.95);
+      border-color: #4ade80;
+      transform: translateX(8px);
+      box-shadow: 0 0 20px rgba(74, 222, 128, 0.35);
+    }
+    .pill-icon-box {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Right Hero Visual: Glowing Futuristic Earth */
+    .hero-visual-col {
+      position: relative;
+      height: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .globe-stage {
+      position: relative;
+      width: 540px;
+      height: 540px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .globe-glow-atmosphere {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.42) 0%, rgba(16, 185, 129, 0.2) 48%, transparent 72%);
+      filter: blur(35px);
+      animation: pulseGlow 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .globe-orb {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 65px rgba(34, 197, 94, 0.65), inset 0 0 45px rgba(34, 197, 94, 0.5);
+      border: 2px solid rgba(74, 222, 128, 0.7);
+      animation: floatGlobe 8s ease-in-out infinite;
+      z-index: 2;
+    }
+    .globe-orb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Orbital SVG Lines */
+    .globe-orbits-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Floating Badges around Earth */
+    .orbit-badge {
+      position: absolute;
+      padding: 9px 16px;
+      border-radius: var(--radius-full);
+      background: rgba(6, 22, 14, 0.88);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(74, 222, 128, 0.45);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65), 0 0 18px rgba(34, 197, 94, 0.28);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: #ffffff;
+      z-index: 4;
+      animation: badgeBob 5s ease-in-out infinite;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .orbit-badge:hover {
+      border-color: #4ade80;
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(74, 222, 128, 0.45);
+    }
+
+    /* Bottom Glassmorphism Statistics Bar */
+    .stats-bar-wrapper {
+      width: 100%;
+      max-width: 1180px;
+      margin: 40px auto 0;
+      z-index: 10;
+      position: relative;
+    }
+    .stats-bar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 18px 32px;
+      gap: 20px;
+      background: rgba(7, 22, 15, 0.78);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(74, 222, 128, 0.32);
+      border-radius: 26px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 20px rgba(34, 197, 94, 0.12);
+    }
+    .stat-bar-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 6px 10px;
+      border-radius: 14px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .stat-bar-item:hover {
+      background: rgba(34, 197, 94, 0.12);
+      transform: translateY(-2px);
+    }
+    .stat-bar-item:not(:last-child) {
+      border-right: 1px solid rgba(74, 222, 128, 0.18);
+    }
+
+    /* ========================================================================
+       BELOW THE HERO SECTIONS (Features, Impact, Campaigns, Issues, Points)
+       ======================================================================== */
+    .section-wrap {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 100px 40px;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .section-eyebrow {
+      color: #86efac;
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    .section-subtitle {
+      color: rgba(240, 253, 244, 0.76);
+      font-size: 1.05rem;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+    }
+    .feature-card {
+      padding: 34px;
+      border-radius: var(--radius-lg);
+      background: rgba(8, 23, 16, 0.72);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(74, 222, 128, 0.22);
+      transition: all var(--transition-smooth);
+    }
+    .feature-card:hover {
+      border-color: #4ade80;
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(74, 222, 128, 0.25);
+    }
+
+    /* Modal System */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 9, 5, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal-card {
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: rgba(8, 24, 16, 0.96);
+      border: 1px solid rgba(74, 222, 128, 0.4);
+      border-radius: 26px;
+      box-shadow: 0 35px 70px rgba(0, 0, 0, 0.85), 0 0 35px rgba(34, 197, 94, 0.28);
+      padding: 34px;
+      position: relative;
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: #ffffff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close-btn:hover {
+      background: rgba(239, 68, 68, 0.35);
+      color: #f87171;
+    }
+
+    /* Role selection tabs in auth modal */
+    .role-tabs {
+      display: flex;
+      background: rgba(3, 12, 8, 0.85);
+      padding: 4px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(74, 222, 128, 0.22);
+      margin-bottom: 22px;
+    }
+    .role-tab-btn {
+      flex: 1;
+      padding: 8px 12px;
+      border: none;
+      background: transparent;
+      color: rgba(240, 253, 244, 0.72);
+      font-size: 0.84rem;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      text-align: center;
+    }
+    .role-tab-btn.active {
+      background: rgba(34, 197, 94, 0.3);
+      color: #ffffff;
+      border: 1px solid rgba(74, 222, 128, 0.45);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.25);
+    }
+
+    /* Toast Notification */
+    .toast-popup {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: rgba(8, 26, 17, 0.98);
+      border: 1px solid #4ade80;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(74, 222, 128, 0.4);
+      padding: 14px 22px;
+      border-radius: 16px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      z-index: 2000;
+      animation: toastFade 0.3s ease;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-eyebrow {
+        justify-content: center;
+      }
+      .hero-headline {
+        font-size: 3.4rem;
+      }
+      .hero-description {
+        margin: 0 auto 30px;
+      }
+      .hero-action-pills {
+        margin: 0 auto;
+      }
+      .hero-visual-col {
+        height: 440px;
+      }
+      .globe-stage {
+        width: 440px;
+        height: 440px;
+      }
+      .globe-orb {
+        width: 320px;
+        height: 320px;
+      }
+      .stats-bar-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stat-bar-item:not(:last-child) {
+        border-right: none;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero-headline {
+        font-size: 2.5rem;
+      }
+      .hero-section {
+        padding: 85px 20px 28px;
+      }
+      .stats-bar-grid {
+        grid-template-columns: 1fr;
+      }
+      .app-nav {
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+<body class="dark-theme">
+
+  <!-- ========================================================================
+       TOP NAVIGATION BAR (Clean, Transparent, Minimal)
+       ======================================================================== -->
+  <header class="app-nav">
+    <div class="nav-brand" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+      <div class="nav-logo-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 20A7 7 0 0 1 4 13c0-4.418 3.582-8 8-8 1.05 0 2.05.203 2.96.572C15.688 2.22 18.667 0 22 0c0 4.418-3.582 8-8 8-.507 0-1-.048-1.474-.141C12.193 9.07 12 10.495 12 12c0 2.21 1.79 4 4 4v2a6 6 0 0 1-5 2z"/>
+        </svg>
+      </div>
+      <div class="nav-brand-title">
+        Eco<span class="text-gradient-green">Track</span>
+      </div>
+    </div>
+
+    <!-- Center Navigation Links -->
+    <nav class="nav-links">
+      <a href="#hero" class="nav-link-item active">Home</a>
+      <a href="#features" class="nav-link-item">Features</a>
+      <a href="#impact" class="nav-link-item">Impact</a>
+      <a href="#campaigns" class="nav-link-item">Campaigns</a>
+      <a href="#issues" class="nav-link-item">Report Issue</a>
+      <a href="#college-points" class="nav-link-item">College Points</a>
+    </nav>
+
+    <!-- Right Controls -->
+    <div class="nav-actions">
+      <!-- Emission Factors Tooltip Trigger -->
+      <button onclick="openModal('factors-modal')" class="glass-pill" style="padding: 7px 14px; font-size: 0.82rem; gap: 6px;" title="View Verified Scientific Emission Factors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        Factors
+      </button>
+
+      <!-- Theme Switcher -->
+      <button onclick="toggleTheme()" class="glass-pill" style="width: 38px; height: 38px; justify-content: center; padding: 0;" title="Toggle Appearance">
+        <svg id="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      </button>
+
+      <!-- Separate Login / Sign Up Trigger Buttons -->
+      <button onclick="openAuthModal('login')" class="btn-secondary-glass" style="padding: 8px 18px; font-size: 0.88rem;">
+        Sign In
+      </button>
+      <button onclick="openAuthModal('register')" class="btn-primary-gradient" style="padding: 8px 18px; font-size: 0.88rem;">
+        Sign Up
+      </button>
+    </div>
+  </header>
+
+
+  <!-- ========================================================================
+       SECTION 1: HERO SECTION (Exact Reference Composition)
+       ======================================================================== -->
+  <section id="hero" class="hero-section">
+    <!-- Atmospheric Background Layers -->
+    <div class="hero-bg-layer">
+      <div class="hero-forest"></div>
+      <div class="hero-vignette"></div>
+      <canvas id="hero-canvas"></canvas>
+    </div>
+
+    <!-- Main Hero Split Grid -->
+    <div class="hero-container">
+      <!-- LEFT SIDE: Eyebrow, Main Headline, Description & 4 Action Pills -->
+      <div class="hero-text-col">
+        <!-- Eyebrow text -->
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-dot"></span>
+          OUR PLANET. OUR RESPONSIBILITY.
+        </div>
+
+        <!-- Main Headline (Matches requested structure: Track Today. Greener Tomorrow.) -->
+        <h1 class="hero-headline">
+          Track Today.<br>
+          <span class="text-gradient-green">Greener</span><br>
+          Tomorrow.
+        </h1>
+
+        <!-- Short Description -->
+        <p class="hero-description">
+          Record your actions, report environmental issues, and create real impact together.
+        </p>
+
+        <!-- 4 Elegant Pill Buttons -->
+        <div class="hero-action-pills">
+          <!-- Primary Pill 1: Track Activities -->
+          <button class="hero-action-pill" onclick="openActivityCalculatorModal()">
+            <div class="pill-icon-box" style="background: rgba(34, 197, 94, 0.22);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M11 20A7 7 0 0 1 4 13c0-4.418 3.582-8 8-8 1.05 0 2.05.203 2.96.572C15.688 2.22 18.667 0 22 0c0 4.418-3.582 8-8 8-.507 0-1-.048-1.474-.141C12.193 9.07 12 10.495 12 12c0 2.21 1.79 4 4 4v2a6 6 0 0 1-5 2z"/></svg>
+            </div>
+            <span>Track Activities</span>
+          </button>
+
+          <!-- Pill 2: Report Issues -->
+          <button class="hero-action-pill" onclick="openReportIssueModal()">
+            <div class="pill-icon-box" style="background: rgba(250, 204, 21, 0.22);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <span>Report Issues</span>
+          </button>
+
+          <!-- Pill 3: Join Campaigns -->
+          <a href="#campaigns" class="hero-action-pill">
+            <div class="pill-icon-box" style="background: rgba(56, 189, 248, 0.22);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span>Join Campaigns</span>
+          </a>
+
+          <!-- Pill 4: See Impact -->
+          <a href="#impact" class="hero-action-pill">
+            <div class="pill-icon-box" style="background: rgba(192, 132, 252, 0.22);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+            </div>
+            <span>See Impact</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE: Large Glowing Earth Globe (NO Login Box!) -->
+      <div class="hero-visual-col">
+        <div class="globe-stage">
+          <!-- Atmospheric Halo Glow -->
+          <div class="globe-glow-atmosphere"></div>
+
+          <!-- Futuristic 3D Earth Globe -->
+          <div class="globe-orb">
+            <img src="assets/earth-centerpiece.jpg" alt="Glowing Earth Sustainability Centerpiece" onerror="this.src='client/public/assets/earth-centerpiece.jpg'">
+          </div>
+
+          <!-- Thin Orbital / Circular Lines -->
+          <svg class="globe-orbits-svg" viewBox="0 0 540 540">
+            <!-- Elliptical Orbit 1 -->
+            <ellipse cx="270" cy="270" rx="235" ry="115" fill="none" stroke="rgba(74, 222, 128, 0.45)" stroke-width="1.8" stroke-dasharray="6 4" style="transform-origin: 270px 270px; transform: rotate(-28deg);"></ellipse>
+            <!-- Elliptical Orbit 2 -->
+            <ellipse cx="270" cy="270" rx="245" ry="125" fill="none" stroke="rgba(134, 239, 172, 0.3)" stroke-width="1.2" stroke-dasharray="4 6" style="transform-origin: 270px 270px; transform: rotate(24deg);"></ellipse>
+          </svg>
+
+          <!-- Floating Environmental Badges Around Earth -->
+          <div class="orbit-badge" style="top: 80px; left: 10px;" onclick="openActivityCalculatorModal()">
+            <span style="color: #4ade80; font-size: 1.1rem;">🌱</span>
+            <span>+12.4k kg CO₂ Saved</span>
+          </div>
+
+          <div class="orbit-badge" style="bottom: 95px; right: 15px;" onclick="openReportIssueModal()">
+            <span style="color: #facc15; font-size: 1.1rem;">⚠️</span>
+            <span>98.4% Issues Resolved</span>
+          </div>
+
+          <div class="orbit-badge" style="top: 245px; right: -25px;" onclick="openCertificateModal()">
+            <span style="color: #c084fc; font-size: 1.1rem;">🏆</span>
+            <span>AICTE 100 Pts Verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM: Glassmorphism Statistics Bar -->
+    <div class="stats-bar-wrapper">
+      <div class="stats-bar-grid">
+        <div class="stat-bar-item" onclick="openActivityCalculatorModal()">
+          <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(34, 197, 94, 0.16); display: flex; align-items: center; justify-content: center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M11 20A7 7 0 0 1 4 13c0-4.418 3.582-8 8-8 1.05 0 2.05.203 2.96.572C15.688 2.22 18.667 0 22 0c0 4.418-3.582 8-8 8-.507 0-1-.048-1.474-.141C12.193 9.07 12 10.495 12 12c0 2.21 1.79 4 4 4v2a6 6 0 0 1-5 2z"/></svg>
+          </div>
+          <div>
+            <div style="font-family: var(--font-heading); font-size: 1.45rem; font-weight: 800; color: #ffffff;">10K+</div>
+            <div style="font-size: 0.8rem; color: rgba(240, 253, 244, 0.72);">Actions Tracked</div>
+          </div>
+        </div>
+
+        <div class="stat-bar-item" onclick="document.getElementById('issues').scrollIntoView({ behavior: 'smooth' })">
+          <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(250, 204, 21, 0.16); display: flex; align-items: center; justify-content: center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div>
+            <div style="font-family: var(--font-heading); font-size: 1.45rem; font-weight: 800; color: #ffffff;">2.5K+</div>
+            <div style="font-size: 0.8rem; color: rgba(240, 253, 244, 0.72);">Issues Reported</div>
+          </div>
+        </div>
+
+        <div class="stat-bar-item" onclick="document.getElementById('campaigns').scrollIntoView({ behavior: 'smooth' })">
+          <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(56, 189, 248, 0.16); display: flex; align-items: center; justify-content: center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <div style="font-family: var(--font-heading); font-size: 1.45rem; font-weight: 800; color: #ffffff;">520+</div>
+            <div style="font-size: 0.8rem; color: rgba(240, 253, 244, 0.72);">Campaigns</div>
+          </div>
+        </div>
+
+        <div class="stat-bar-item" onclick="document.getElementById('impact').scrollIntoView({ behavior: 'smooth' })">
+          <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(192, 132, 252, 0.16); display: flex; align-items: center; justify-content: center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          </div>
+          <div>
+            <div style="font-family: var(--font-heading); font-size: 1.45rem; font-weight: 800; color: #ffffff;">74t</div>
+            <div style="font-size: 0.8rem; color: rgba(240, 253, 244, 0.72);">CO₂ Saved</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       SECTION 2: FEATURES SECTION
+       ======================================================================== -->
+  <section id="features" class="section-wrap">
+    <div class="section-header">
+      <span class="section-eyebrow">Comprehensive Environmental Suite</span>
+      <h2 class="section-title">Built for Campus & Community Impact</h2>
+      <p class="section-subtitle">
+        EcoTrack connects students, faculty advisors, and facilities governance teams on a unified, verified environmental ledger.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <!-- Feature 1 -->
+      <div class="feature-card">
+        <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(34, 197, 94, 0.16); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M11 20A7 7 0 0 1 4 13c0-4.418 3.582-8 8-8 1.05 0 2.05.203 2.96.572C15.688 2.22 18.667 0 22 0c0 4.418-3.582 8-8 8-.507 0-1-.048-1.474-.141C12.193 9.07 12 10.495 12 12c0 2.21 1.79 4 4 4v2a6 6 0 0 1-5 2z"/></svg>
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: #ffffff; margin-bottom: 10px;">Track Environmental Activities</h3>
+        <p style="color: rgba(240, 253, 244, 0.72); font-size: 0.88rem; line-height: 1.6; margin-bottom: 20px;">
+          Log green commutes, tree sapling plantations, waste segregation, and energy reductions using standardized EPA and DEFRA calibrated emission factors.
+        </p>
+        <button onclick="openActivityCalculatorModal()" style="background: none; border: none; color: #4ade80; font-weight: 700; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+          Launch Calculator →
+        </button>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card">
+        <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(250, 204, 21, 0.16); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: #ffffff; margin-bottom: 10px;">Report Environmental Issues</h3>
+        <p style="color: rgba(240, 253, 244, 0.72); font-size: 0.88rem; line-height: 1.6; margin-bottom: 20px;">
+          Photo-tag water pipe leaks, overflowing plastic bins, and electrical waste for instant dispatch to facility repair crews.
+        </p>
+        <button onclick="openReportIssueModal()" style="background: none; border: none; color: #facc15; font-weight: 700; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+          Report Hazard →
+        </button>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card">
+        <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(56, 189, 248, 0.16); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: #ffffff; margin-bottom: 10px;">Join Campus Campaigns</h3>
+        <p style="color: rgba(240, 253, 244, 0.72); font-size: 0.88rem; line-height: 1.6; margin-bottom: 20px;">
+          Participate in inter-departmental challenges such as Clean Campus Mega Drive, Plastic-Free Canteen, and 1,000 Sapling Marathons.
+        </p>
+        <a href="#campaigns" style="color: #38bdf8; font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
+          Explore Drives →
+        </a>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="feature-card">
+        <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(192, 132, 252, 0.16); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: #ffffff; margin-bottom: 10px;">Earn College Activity Points</h3>
+        <p style="color: rgba(240, 253, 244, 0.72); font-size: 0.88rem; line-height: 1.6; margin-bottom: 20px;">
+          Satisfy AICTE, VTU, and UGC mandatory activity point graduation quotas with cryptographic QR-verifiable honors certificates.
+        </p>
+        <a href="#college-points" style="color: #c084fc; font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
+          View Points Matrix →
+        </a>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="feature-card">
+        <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(74, 222, 128, 0.16); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: #ffffff; margin-bottom: 10px;">Measure Environmental Impact</h3>
+        <p style="color: rgba(240, 253, 244, 0.72); font-size: 0.88rem; line-height: 1.6; margin-bottom: 20px;">
+          Access institutional ESG reporting data, greenhouse gas abatement charts, and department-level environmental health metrics.
+        </p>
+        <a href="#impact" style="color: #4ade80; font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 6px;">
+          View Macro Analytics →
+        </a>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="feature-card">
+        <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(34, 197, 94, 0.16); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: #ffffff; margin-bottom: 10px;">Anti-Cheating Intelligence</h3>
+        <p style="color: rgba(240, 253, 244, 0.72); font-size: 0.88rem; line-height: 1.6; margin-bottom: 20px;">
+          Algorithmic limit caps, geolocation verification, and faculty oversight prevent inflated figures and guarantee authentic green credentials.
+        </p>
+        <button onclick="openModal('factors-modal')" style="background: none; border: none; color: #86efac; font-weight: 700; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+          Audit Standards →
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       SECTION 3: IMPACT & ANALYTICS
+       ======================================================================== -->
+  <section id="impact" class="section-wrap" style="background: radial-gradient(circle at 50% 50%, rgba(7, 24, 15, 0.8) 0%, transparent 80%);">
+    <div class="section-header">
+      <span class="section-eyebrow">Macro Environmental Intelligence</span>
+      <h2 class="section-title">Measurable Real-World Impact</h2>
+      <p class="section-subtitle">
+        Peer-reviewed conversion models translate individual actions into collective campus greenhouse gas reduction.
+      </p>
+    </div>
+
+    <!-- 3 Big Metric Highlights -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px;">
+      <div class="glass-panel" style="padding: 32px; text-align: center;">
+        <div style="font-size: 2.6rem; margin-bottom: 8px;">🌲</div>
+        <div style="font-family: var(--font-heading); font-size: 2.8rem; font-weight: 900; color: #4ade80;">1,966</div>
+        <div style="font-size: 1rem; color: #ffffff; font-weight: 700; margin-top: 4px;">Mature Trees Absorbing CO₂</div>
+        <div style="font-size: 0.78rem; color: rgba(240, 253, 244, 0.65); margin-top: 6px;">Based on 21.77 kg CO₂/tree/year absorption factor</div>
+      </div>
+
+      <div class="glass-panel" style="padding: 32px; text-align: center;">
+        <div style="font-size: 2.6rem; margin-bottom: 8px;">🚗</div>
+        <div style="font-family: var(--font-heading); font-size: 2.8rem; font-weight: 900; color: #38bdf8;">250,290</div>
+        <div style="font-size: 1rem; color: #ffffff; font-weight: 700; margin-top: 4px;">Kilometers of Car Travel Avoided</div>
+        <div style="font-size: 0.78rem; color: rgba(240, 253, 244, 0.65); margin-top: 6px;">At average combustion factor of 0.171 kg CO₂/km</div>
+      </div>
+
+      <div class="glass-panel" style="padding: 32px; text-align: center;">
+        <div style="font-size: 2.6rem; margin-bottom: 8px;">💡</div>
+        <div style="font-family: var(--font-heading); font-size: 2.8rem; font-weight: 900; color: #facc15;">52,195</div>
+        <div style="font-size: 1rem; color: #ffffff; font-weight: 700; margin-top: 4px;">Kilowatt-Hours Clean Energy Saved</div>
+        <div style="font-size: 0.78rem; color: rgba(240, 253, 244, 0.65); margin-top: 6px;">Powering 140 campus labs for a full month</div>
+      </div>
+    </div>
+
+    <!-- Monthly Chart & Category Breakdown -->
+    <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px;">
+      <div class="glass-panel" style="padding: 34px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+          <h3 style="font-size: 1.3rem; font-weight: 700; color: #ffffff;">Monthly Carbon Offset (Metric Tons)</h3>
+          <span class="glass-pill" style="padding: 3px 12px; font-size: 0.75rem; color: #4ade80;">2026 Academic Year</span>
+        </div>
+
+        <div style="height: 220px; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding-bottom: 24px; position: relative;">
+          <div style="position: absolute; bottom: 24px; left: 0; width: 100%; height: 1px; background: rgba(74, 222, 128, 0.2);"></div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 100%; height: 75px; background: linear-gradient(to top, rgba(34, 197, 94, 0.4), #4ade80); border-radius: 8px 8px 0 0; position: relative;">
+              <span style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 0.72rem; color: #86efac;">2.8</span>
+            </div>
+            <span style="font-size: 0.75rem; color: rgba(240, 253, 244, 0.7);">Jan</span>
+          </div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 100%; height: 105px; background: linear-gradient(to top, rgba(34, 197, 94, 0.4), #4ade80); border-radius: 8px 8px 0 0; position: relative;">
+              <span style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 0.72rem; color: #86efac;">4.1</span>
+            </div>
+            <span style="font-size: 0.75rem; color: rgba(240, 253, 244, 0.7);">Feb</span>
+          </div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 100%; height: 140px; background: linear-gradient(to top, rgba(34, 197, 94, 0.4), #4ade80); border-radius: 8px 8px 0 0; position: relative;">
+              <span style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 0.72rem; color: #86efac;">5.4</span>
+            </div>
+            <span style="font-size: 0.75rem; color: rgba(240, 253, 244, 0.7);">Mar</span>
+          </div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 100%; height: 130px; background: linear-gradient(to top, rgba(34, 197, 94, 0.4), #4ade80); border-radius: 8px 8px 0 0; position: relative;">
+              <span style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 0.72rem; color: #86efac;">4.9</span>
+            </div>
+            <span style="font-size: 0.75rem; color: rgba(240, 253, 244, 0.7);">Apr</span>
+          </div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 100%; height: 170px; background: linear-gradient(to top, rgba(34, 197, 94, 0.4), #4ade80); border-radius: 8px 8px 0 0; position: relative;">
+              <span style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 0.72rem; color: #86efac;">6.8</span>
+            </div>
+            <span style="font-size: 0.75rem; color: rgba(240, 253, 244, 0.7);">May</span>
+          </div>
+
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 100%; height: 195px; background: linear-gradient(to top, rgba(34, 197, 94, 0.55), #22c55e); border-radius: 8px 8px 0 0; position: relative; box-shadow: 0 0 16px rgba(34, 197, 94, 0.5);">
+              <span style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 0.72rem; color: #86efac; font-weight: 700;">8.2</span>
+            </div>
+            <span style="font-size: 0.75rem; color: #4ade80; font-weight: 700;">Current</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-panel" style="padding: 34px;">
+        <h3 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 22px;">Impact by Category</h3>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.84rem; margin-bottom: 6px;">
+              <span style="color: #4ade80; font-weight: 600;">🚲 Green Commute (42%)</span>
+              <span style="color: #ffffff; font-weight: 600;">17.9 Metric Tons</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: rgba(255, 255, 255, 0.08); border-radius: 99px; overflow: hidden;">
+              <div style="width: 42%; height: 100%; background: #4ade80; border-radius: 99px;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.84rem; margin-bottom: 6px;">
+              <span style="color: #38bdf8; font-weight: 600;">🌳 Tree Planting (28%)</span>
+              <span style="color: #ffffff; font-weight: 600;">11.9 Metric Tons</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: rgba(255, 255, 255, 0.08); border-radius: 99px; overflow: hidden;">
+              <div style="width: 28%; height: 100%; background: #38bdf8; border-radius: 99px;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.84rem; margin-bottom: 6px;">
+              <span style="color: #facc15; font-weight: 600;">♻️ Waste Diversion (18%)</span>
+              <span style="color: #ffffff; font-weight: 600;">7.7 Metric Tons</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: rgba(255, 255, 255, 0.08); border-radius: 99px; overflow: hidden;">
+              <div style="width: 18%; height: 100%; background: #facc15; border-radius: 99px;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.84rem; margin-bottom: 6px;">
+              <span style="color: #c084fc; font-weight: 600;">💡 Energy Audits (12%)</span>
+              <span style="color: #ffffff; font-weight: 600;">5.1 Metric Tons</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: rgba(255, 255, 255, 0.08); border-radius: 99px; overflow: hidden;">
+              <div style="width: 12%; height: 100%; background: #c084fc; border-radius: 99px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       SECTION 4: ACTIVE CAMPAIGNS
+       ======================================================================== -->
+  <section id="campaigns" class="section-wrap">
+    <div class="section-header">
+      <span class="section-eyebrow">Collective Campus Drives</span>
+      <h2 class="section-title">Active Sustainability Campaigns</h2>
+      <p class="section-subtitle">
+        Rally with peer departments, earn double college points, and achieve institutional sustainability benchmarks.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 26px;">
+      <!-- Campaign Card 1 -->
+      <div class="glass-panel" style="padding: 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+          <span class="glass-pill" style="padding: 4px 12px; font-size: 0.75rem; color: #4ade80;">Active • 12 Days Left</span>
+          <div style="font-size: 1.8rem;">🌱</div>
+        </div>
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Clean Campus Mega Drive 2026</h3>
+        <p style="font-size: 0.85rem; color: rgba(240, 253, 244, 0.75); line-height: 1.6; margin-bottom: 22px;">
+          Divert 5,000 kg of non-biodegradable waste from municipal landfills across all campus departments.
+        </p>
+
+        <div style="margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 6px;">
+            <span style="color: #a7f3d0;">Progress: 3,920 / 5,000 kg</span>
+            <span style="color: #4ade80; font-weight: 700;">78%</span>
+          </div>
+          <div style="width: 100%; height: 10px; background: rgba(255, 255, 255, 0.08); border-radius: 99px; overflow: hidden;">
+            <div style="width: 78%; height: 100%; background: linear-gradient(90deg, #22c55e, #4ade80); border-radius: 99px;"></div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(74, 222, 128, 0.16); padding-top: 18px;">
+          <div style="font-size: 0.82rem; color: rgba(240, 253, 244, 0.7);">👥 412 Participants</div>
+          <button onclick="toggleJoinCampaign(this)" class="btn-primary-gradient" style="padding: 8px 20px; font-size: 0.85rem;">
+            Join Campaign
+          </button>
+        </div>
+      </div>
+
+      <!-- Campaign Card 2 -->
+      <div class="glass-panel" style="padding: 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+          <span class="glass-pill" style="padding: 4px 12px; font-size: 0.75rem; color: #38bdf8;">Active • 18 Days Left</span>
+          <div style="font-size: 1.8rem;">🌳</div>
+        </div>
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Plant 1,000 Native Saplings</h3>
+        <p style="font-size: 0.85rem; color: rgba(240, 253, 244, 0.75); line-height: 1.6; margin-bottom: 22px;">
+          Afforestation drive introducing native shade and fruit trees around campus hostels and athletic fields.
+        </p>
+
+        <div style="margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 6px;">
+            <span style="color: #a7f3d0;">Progress: 640 / 1,000 Trees</span>
+            <span style="color: #38bdf8; font-weight: 700;">64%</span>
+          </div>
+          <div style="width: 100%; height: 10px; background: rgba(255, 255, 255, 0.08); border-radius: 99px; overflow: hidden;">
+            <div style="width: 64%; height: 100%; background: linear-gradient(90deg, #0284c7, #38bdf8); border-radius: 99px;"></div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(74, 222, 128, 0.16); padding-top: 18px;">
+          <div style="font-size: 0.82rem; color: rgba(240, 253, 244, 0.7);">👥 289 Participants</div>
+          <button onclick="toggleJoinCampaign(this)" class="btn-primary-gradient" style="padding: 8px 20px; font-size: 0.85rem;">
+            Join Campaign
+          </button>
+        </div>
+      </div>
+
+      <!-- Campaign Card 3 -->
+      <div class="glass-panel" style="padding: 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+          <span class="glass-pill" style="padding: 4px 12px; font-size: 0.75rem; color: #facc15;">Active • 8 Days Left</span>
+          <div style="font-size: 1.8rem;">🚲</div>
+        </div>
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Cycle to Campus Marathon</h3>
+        <p style="font-size: 0.85rem; color: rgba(240, 253, 244, 0.75); line-height: 1.6; margin-bottom: 22px;">
+          Collective 10,000 km target logged via bicycle or walking to replace motor vehicle emissions.
+        </p>
+
+        <div style="margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 6px;">
+            <span style="color: #a7f3d0;">Progress: 8,520 / 10,000 km</span>
+            <span style="color: #facc15; font-weight: 700;">85%</span>
+          </div>
+          <div style="width: 100%; height: 10px; background: rgba(255, 255, 255, 0.08); border-radius: 99px; overflow: hidden;">
+            <div style="width: 85%; height: 100%; background: linear-gradient(90deg, #ca8a04, #facc15); border-radius: 99px;"></div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(74, 222, 128, 0.16); padding-top: 18px;">
+          <div style="font-size: 0.82rem; color: rgba(240, 253, 244, 0.7);">👥 540 Participants</div>
+          <button onclick="toggleJoinCampaign(this)" class="btn-primary-gradient" style="padding: 8px 20px; font-size: 0.85rem;">
+            Join Campaign
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       SECTION 5: REPORT CAMPUS ISSUE
+       ======================================================================== -->
+  <section id="issues" class="section-wrap" style="background: radial-gradient(circle at 50% 50%, rgba(9, 28, 18, 0.7) 0%, transparent 80%);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px;">
+      <div>
+        <span class="section-eyebrow" style="color: #facc15;">Facility Operations & Safety</span>
+        <h2 class="section-title">Campus Environmental Issues</h2>
+        <p class="section-subtitle" style="margin: 0; text-align: left;">
+          Crowdsourced rapid response for water leaks, overflowing plastic dumps, and campus hazards.
+        </p>
+      </div>
+
+      <button onclick="openReportIssueModal()" class="btn-primary-gradient" style="background: linear-gradient(135deg, #facc15 0%, #eab308 100%); color: #04140a;">
+        + Report Campus Hazard
+      </button>
+    </div>
+
+    <!-- Issues Cards Grid -->
+    <div id="issues-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px;">
+      <!-- Issue 1 -->
+      <div class="glass-panel" data-severity="urgent" style="overflow: hidden;">
+        <div style="height: 190px; position: relative; overflow: hidden; background: #0b1a13;">
+          <img src="assets/issue-sample-1.jpg" alt="Water Leak Issue" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='client/public/assets/issue-sample-1.jpg'">
+          <div style="position: absolute; top: 12px; left: 12px; background: rgba(239, 68, 68, 0.92); color: #fff; padding: 4px 10px; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700;">
+            CRITICAL HAZARD
+          </div>
+          <div style="position: absolute; top: 12px; right: 12px; background: rgba(0, 0, 0, 0.72); backdrop-filter: blur(8px); color: #fff; padding: 4px 10px; border-radius: var(--radius-full); font-size: 0.75rem;">
+            Open
+          </div>
+        </div>
+        <div style="padding: 22px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: #a7f3d0; margin-bottom: 6px;">
+            <span>📍 Main Lawn Sprinkler Line A</span> • <span>12 mins ago</span>
+          </div>
+          <h4 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 8px;">
+            High-pressure pipe rupture wasting ~200L water/hr
+          </h4>
+          <p style="font-size: 0.82rem; color: rgba(240, 253, 244, 0.75); line-height: 1.5; margin-bottom: 18px;">
+            Underground water valve broken near academic library lawn. Flooding walkway and eroding soil.
+          </p>
+          <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(74, 222, 128, 0.15); padding-top: 14px;">
+            <button onclick="upvoteIssue(this)" class="glass-pill" style="padding: 6px 14px; font-size: 0.8rem; gap: 6px;">
+              <span>▲ Upvote</span> <span class="vote-count">48</span>
+            </button>
+            <span style="font-size: 0.78rem; color: #facc15;">Dispatched to Plumbing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issue 2 -->
+      <div class="glass-panel" data-severity="moderate" style="overflow: hidden;">
+        <div style="height: 190px; position: relative; overflow: hidden; background: #0b1a13;">
+          <img src="assets/issue-sample-2.jpg" alt="Plastic Waste Issue" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='client/public/assets/issue-sample-2.jpg'">
+          <div style="position: absolute; top: 12px; left: 12px; background: rgba(234, 179, 8, 0.92); color: #000; padding: 4px 10px; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700;">
+            MODERATE
+          </div>
+          <div style="position: absolute; top: 12px; right: 12px; background: rgba(56, 189, 248, 0.3); border: 1px solid #38bdf8; color: #38bdf8; padding: 4px 10px; border-radius: var(--radius-full); font-size: 0.75rem;">
+            In Progress
+          </div>
+        </div>
+        <div style="padding: 22px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: #a7f3d0; margin-bottom: 6px;">
+            <span>📍 Cafeteria Rear Waste Enclosure</span> • <span>2 hours ago</span>
+          </div>
+          <h4 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 8px;">
+            Overflowing unsegregated single-use plastic cups
+          </h4>
+          <p style="font-size: 0.82rem; color: rgba(240, 253, 244, 0.75); line-height: 1.5; margin-bottom: 18px;">
+            Recycling bins are fully packed with non-biodegradable food containers spilling onto pedestrian walkway.
+          </p>
+          <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(74, 222, 128, 0.15); padding-top: 14px;">
+            <button onclick="upvoteIssue(this)" class="glass-pill" style="padding: 6px 14px; font-size: 0.8rem; gap: 6px;">
+              <span>▲ Upvote</span> <span class="vote-count">31</span>
+            </button>
+            <span style="font-size: 0.78rem; color: #38bdf8;">Waste Mgmt Team Assigned</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issue 3 -->
+      <div class="glass-panel" data-severity="low" style="overflow: hidden;">
+        <div style="height: 190px; position: relative; overflow: hidden; background: #0b1a13;">
+          <img src="assets/issue-sample-3.jpg" alt="Energy Waste Issue" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='client/public/assets/issue-sample-3.jpg'">
+          <div style="position: absolute; top: 12px; left: 12px; background: rgba(34, 197, 94, 0.92); color: #042413; padding: 4px 10px; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700;">
+            RESOLVED
+          </div>
+          <div style="position: absolute; top: 12px; right: 12px; background: rgba(34, 197, 94, 0.25); border: 1px solid #4ade80; color: #4ade80; padding: 4px 10px; border-radius: var(--radius-full); font-size: 0.75rem;">
+            Fixed Today
+          </div>
+        </div>
+        <div style="padding: 22px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: #a7f3d0; margin-bottom: 6px;">
+            <span>📍 Science Block Room 304</span> • <span>Yesterday</span>
+          </div>
+          <h4 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 8px;">
+            Faulty AC left running on weekends unattended
+          </h4>
+          <p style="font-size: 0.82rem; color: rgba(240, 253, 244, 0.75); line-height: 1.5; margin-bottom: 18px;">
+            HVAC thermostat malfunction caused continuous refrigeration load overnight. Electrician installed timer switch.
+          </p>
+          <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(74, 222, 128, 0.15); padding-top: 14px;">
+            <button onclick="upvoteIssue(this)" class="glass-pill" style="padding: 6px 14px; font-size: 0.8rem; gap: 6px;">
+              <span>▲ Upvote</span> <span class="vote-count">19</span>
+            </button>
+            <span style="font-size: 0.78rem; color: #4ade80;">Saved ~45 kWh</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       SECTION 6: COLLEGE ACTIVITY POINTS & DIGITAL CERTIFICATE
+       ======================================================================== -->
+  <section id="college-points" class="section-wrap">
+    <div class="section-header">
+      <span class="section-eyebrow" style="color: #c084fc;">Accredited University Matrix</span>
+      <h2 class="section-title">College Activity Points (AICTE / VTU / UGC)</h2>
+      <p class="section-subtitle">
+        Mandatory extracurricular environmental points required for degree qualification. Track hours and generate certified digital transcripts.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px;">
+      <div class="glass-panel" style="padding: 34px;">
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin-bottom: 18px;">
+          Point Allocation Matrix
+        </h3>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="padding: 16px; background: rgba(5, 18, 12, 0.65); border-radius: 14px; border: 1px solid rgba(74, 222, 128, 0.22);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-weight: 700; color: #4ade80;">Category 1: Campus Tree Care & Biodiversity</span>
+              <span style="font-weight: 700; color: #ffffff;">Max 30 Pts</span>
+            </div>
+            <p style="font-size: 0.84rem; color: rgba(240, 253, 244, 0.72); line-height: 1.5;">
+              Native sapling planting, organic garden upkeep, campus flora tagging, and micro-forest maintenance.
+            </p>
+          </div>
+
+          <div style="padding: 16px; background: rgba(5, 18, 12, 0.65); border-radius: 14px; border: 1px solid rgba(74, 222, 128, 0.22);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-weight: 700; color: #38bdf8;">Category 2: Resource Audits & Hazard Remediation</span>
+              <span style="font-weight: 700; color: #ffffff;">Max 35 Pts</span>
+            </div>
+            <p style="font-size: 0.84rem; color: rgba(240, 253, 244, 0.72); line-height: 1.5;">
+              Energy shutdown protocols, water pipe leak inspections, and facilities hazardous waste reporting.
+            </p>
+          </div>
+
+          <div style="padding: 16px; background: rgba(5, 18, 12, 0.65); border-radius: 14px; border: 1px solid rgba(74, 222, 128, 0.22);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-weight: 700; color: #c084fc;">Category 3: Green Commute & Plastic Diversion</span>
+              <span style="font-weight: 700; color: #ffffff;">Max 35 Pts</span>
+            </div>
+            <p style="font-size: 0.84rem; color: rgba(240, 253, 244, 0.72); line-height: 1.5;">
+              Verified bicycle commute streaks, single-use canteen plastic elimination, and e-waste drives.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-panel" style="padding: 34px; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(145deg, rgba(8, 28, 18, 0.95), rgba(14, 45, 30, 0.9));">
+        <div>
+          <div style="font-size: 2.4rem; margin-bottom: 12px;">📜</div>
+          <h3 style="font-size: 1.45rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+            Digital Certificate of Environmental Impact
+          </h3>
+          <p style="font-size: 0.86rem; color: rgba(240, 253, 244, 0.76); line-height: 1.55; margin-bottom: 24px;">
+            Generates a verified digital certificate with an embedded cryptographic verification QR simulator for degree qualification submission.
+          </p>
+
+          <div style="background: rgba(4, 15, 10, 0.75); padding: 18px; border-radius: 14px; border: 1px solid rgba(74, 222, 128, 0.25); margin-bottom: 24px;">
+            <div style="font-size: 0.78rem; color: #a7f3d0; margin-bottom: 4px;">Student Name:</div>
+            <div style="font-weight: 700; color: #ffffff; font-size: 1.1rem;">Alex Rivera (USN: 1ST22CS084)</div>
+            <div style="font-size: 0.78rem; color: #a7f3d0; margin-top: 10px; margin-bottom: 4px;">Verified Points:</div>
+            <div style="font-weight: 700; color: #4ade80; font-size: 1.25rem;">68 Activity Points (Grade: A)</div>
+          </div>
+        </div>
+
+        <button onclick="openCertificateModal()" class="btn-primary-gradient" style="height: 50px; width: 100%; justify-content: center;">
+          Generate Official Certificate 🖨️
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer style="border-top: 1px solid rgba(74, 222, 128, 0.16); padding: 50px 44px 40px; background: #040e09; color: rgba(240, 253, 244, 0.7);">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="nav-logo-icon" style="width: 32px; height: 32px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2"><path d="M11 20A7 7 0 0 1 4 13c0-4.418 3.582-8 8-8 1.05 0 2.05.203 2.96.572C15.688 2.22 18.667 0 22 0c0 4.418-3.582 8-8 8-.507 0-1-.048-1.474-.141C12.193 9.07 12 10.495 12 12c0 2.21 1.79 4 4 4v2a6 6 0 0 1-5 2z"/></svg>
+        </div>
+        <span style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; color: #ffffff;">
+          Eco<span class="text-gradient-green">Track</span>
+        </span>
+      </div>
+
+      <div style="font-size: 0.84rem;">
+        © 2026 EcoTrack Systems. Our Planet. Our Responsibility. All rights reserved.
+      </div>
+
+      <div style="display: flex; gap: 16px; font-size: 0.84rem;">
+        <a href="#hero" style="color: #4ade80;">Back to Top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ========================================================================
+       MODAL 1: SEPARATE AUTHENTICATION MODAL (LOGIN / REGISTER)
+       ======================================================================== -->
+  <div id="auth-modal" class="modal-overlay" onclick="closeModalOnBackdrop(event, 'auth-modal')">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeModal('auth-modal')">✕</button>
+
+      <div style="margin-bottom: 20px; text-align: center;">
+        <div style="width: 46px; height: 46px; border-radius: 14px; background: rgba(34, 197, 94, 0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.2"><path d="M11 20A7 7 0 0 1 4 13c0-4.418 3.582-8 8-8 1.05 0 2.05.203 2.96.572C15.688 2.22 18.667 0 22 0c0 4.418-3.582 8-8 8-.507 0-1-.048-1.474-.141C12.193 9.07 12 10.495 12 12c0 2.21 1.79 4 4 4v2a6 6 0 0 1-5 2z"/></svg>
+        </div>
+        <h3 id="auth-modal-title" style="font-size: 1.7rem; font-weight: 800; color: #ffffff;">Sign In to EcoTrack</h3>
+        <p id="auth-modal-subtitle" style="font-size: 0.85rem; color: rgba(240, 253, 244, 0.72); margin-top: 4px;">
+          Access your verified environmental logs and college points.
+        </p>
+      </div>
+
+      <!-- Role Selector Tabs -->
+      <div class="role-tabs">
+        <button class="role-tab-btn active" onclick="setRole('student', this)">Student</button>
+        <button class="role-tab-btn" onclick="setRole('faculty', this)">Faculty</button>
+        <button class="role-tab-btn" onclick="setRole('admin', this)">Campus Admin</button>
+      </div>
+
+      <!-- Form -->
+      <form onsubmit="handleAuthSubmit(event)" style="display: flex; flex-direction: column; gap: 14px;">
+        <div id="auth-name-group" style="display: none;">
+          <label style="font-size: 0.8rem; color: #a7f3d0; font-weight: 500;">Full Name</label>
+          <input id="auth-name-input" type="text" placeholder="Alex Rivera" class="input-field" style="margin-top: 4px;">
+        </div>
+
+        <div>
+          <label style="font-size: 0.8rem; color: #a7f3d0; font-weight: 500;">Institutional Email</label>
+          <input id="auth-email-input" type="email" required placeholder="alex.rivera@university.edu" value="alex.rivera@university.edu" class="input-field" style="margin-top: 4px;">
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+            <label style="font-size: 0.8rem; color: #a7f3d0; font-weight: 500;">Password</label>
+            <a href="javascript:void(0)" onclick="showToast('Password reset link dispatched to university email.')" style="font-size: 0.78rem; color: #4ade80;">Forgot?</a>
+          </div>
+          <input id="auth-password-input" type="password" required placeholder="••••••••" value="demo1234" class="input-field" style="margin-top: 4px;">
+        </div>
+
+        <button type="submit" id="auth-submit-btn" class="btn-primary-gradient" style="height: 48px; width: 100%; margin-top: 6px;">
+          Sign In
+        </button>
+
+        <button type="button" onclick="quickDemoLogin()" class="btn-secondary-glass" style="height: 42px; width: 100%;">
+          ⚡ Quick Demo Login (Instant Access)
+        </button>
+
+        <div style="text-align: center; margin-top: 8px; font-size: 0.82rem; color: rgba(240, 253, 244, 0.75);">
+          <span id="auth-toggle-text">Don't have an account?</span>
+          <a href="javascript:void(0)" id="auth-toggle-link" onclick="toggleAuthMode()" style="color: #4ade80; font-weight: 700; margin-left: 4px;">Sign Up</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================
+       MODAL 2: ACTIVITY TRACKER & REAL-TIME CALCULATOR
+       ======================================================================== -->
+  <div id="calculator-modal" class="modal-overlay" onclick="closeModalOnBackdrop(event, 'calculator-modal')">
+    <div class="modal-card" style="max-width: 620px;">
+      <button class="modal-close-btn" onclick="closeModal('calculator-modal')">✕</button>
+
+      <div style="margin-bottom: 18px;">
+        <span class="glass-pill" style="padding: 3px 10px; font-size: 0.75rem; color: #4ade80;">Verified Scientific Logger</span>
+        <h3 style="font-size: 1.6rem; font-weight: 800; color: #ffffff; margin-top: 6px;">Log Environmental Action</h3>
+        <p style="font-size: 0.85rem; color: rgba(240, 253, 244, 0.75); margin-top: 2px;">
+          Calculate lifecycle CO₂ reductions and submit verification proof.
+        </p>
+      </div>
+
+      <!-- Real-Time Calculation Banner -->
+      <div style="padding: 18px 22px; background: rgba(5, 18, 12, 0.8); border: 1px solid rgba(74, 222, 128, 0.35); border-radius: 16px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <div style="font-size: 0.76rem; color: #a7f3d0;">Estimated CO₂ Reduction:</div>
+          <div id="modal-co2-val" style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 900; color: #ffffff;">
+            1.71 <span style="font-size: 1.1rem; color: #4ade80;">kg CO₂e</span>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 0.76rem; color: #a7f3d0;">Activity Points:</div>
+          <div id="modal-pts-val" style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: #86efac;">
+            +10 pts
+          </div>
+        </div>
+      </div>
+
+      <form onsubmit="handleModalActivitySubmit(event)" style="display: flex; flex-direction: column; gap: 14px;">
+        <div>
+          <label style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Activity Category</label>
+          <select id="modal-act-cat" class="input-field" style="margin-top: 4px;" onchange="updateModalCalc()">
+            <option value="commute">🚲 Green Commute (Bicycle, Walking, Metro)</option>
+            <option value="tree">🌳 Tree Plantation & Care</option>
+            <option value="energy">💡 Energy Conservation (LED, Power-down)</option>
+            <option value="waste">♻️ Waste Segregation & Recycling</option>
+          </select>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <label id="modal-act-unit-label" style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Distance (km)</label>
+            <input id="modal-act-qty" type="number" min="0.1" step="0.1" value="10" required class="input-field" style="margin-top: 4px;" oninput="updateModalCalc()">
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Location</label>
+            <input type="text" placeholder="Campus / Transit Line" value="North Campus Gate" class="input-field" style="margin-top: 4px;">
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Verification Photo Proof</label>
+          <div style="border: 2px dashed rgba(74, 222, 128, 0.35); border-radius: var(--radius-md); padding: 16px; text-align: center; margin-top: 4px; background: rgba(4, 14, 9, 0.6); cursor: pointer;" onclick="document.getElementById('modal-proof-file').click()">
+            <span style="font-size: 1.4rem;">📸</span>
+            <div style="font-size: 0.82rem; color: #86efac; font-weight: 600;">Click to upload geotagged proof photo</div>
+            <input id="modal-proof-file" type="file" accept="image/*" style="display: none;" onchange="showToast('Proof photo attached successfully!')">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary-gradient" style="height: 48px; width: 100%; margin-top: 4px;">
+          Submit Verified Action
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================
+       MODAL 3: REPORT CAMPUS HAZARD
+       ======================================================================== -->
+  <div id="report-modal" class="modal-overlay" onclick="closeModalOnBackdrop(event, 'report-modal')">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeModal('report-modal')">✕</button>
+      <h3 style="font-size: 1.6rem; font-weight: 800; color: #ffffff; margin-bottom: 4px;">Report Campus Hazard</h3>
+      <p style="font-size: 0.84rem; color: rgba(240, 253, 244, 0.75); margin-bottom: 20px;">
+        Photos and location tags are immediately routed to facilities emergency crews.
+      </p>
+
+      <form onsubmit="handleModalIssueSubmit(event)" style="display: flex; flex-direction: column; gap: 14px;">
+        <div>
+          <label style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Issue Title</label>
+          <input id="m-issue-title" type="text" required placeholder="e.g. Broken sprinkler pipe flooding sidewalk" class="input-field" style="margin-top: 4px;">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <label style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Category</label>
+            <select id="m-issue-cat" class="input-field" style="margin-top: 4px;">
+              <option>Water Leakage</option>
+              <option>Plastic Waste Dump</option>
+              <option>Electrical Waste</option>
+              <option>Chemical Hazard</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Severity Level</label>
+            <select id="m-issue-sev" class="input-field" style="margin-top: 4px;">
+              <option value="urgent">🚨 Critical Hazard</option>
+              <option value="moderate" selected>⚠️ Moderate</option>
+              <option value="low">ℹ️ Maintenance</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Exact Location</label>
+          <input id="m-issue-loc" type="text" required placeholder="e.g. Science Block 2nd Floor Lawn" class="input-field" style="margin-top: 4px;">
+        </div>
+
+        <div>
+          <label style="font-size: 0.8rem; color: #a7f3d0; font-weight: 600;">Description</label>
+          <textarea id="m-issue-desc" rows="3" required placeholder="Describe hazard details and immediate safety concerns..." class="input-field" style="margin-top: 4px;"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary-gradient" style="height: 48px; width: 100%; margin-top: 4px;">
+          Dispatch Hazard Report
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================
+       MODAL 4: SCIENTIFIC EMISSION FACTORS
+       ======================================================================== -->
+  <div id="factors-modal" class="modal-overlay" onclick="closeModalOnBackdrop(event, 'factors-modal')">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeModal('factors-modal')">✕</button>
+      <span class="glass-pill" style="padding: 3px 10px; font-size: 0.75rem; color: #4ade80;">Calibrated Constants</span>
+      <h3 style="font-size: 1.6rem; font-weight: 800; color: #ffffff; margin-top: 8px;">Scientific Emission Factors</h3>
+      <p style="font-size: 0.84rem; color: rgba(240, 253, 244, 0.75); margin: 4px 0 20px;">
+        All lifecycle metrics follow peer-reviewed international greenhouse gas inventories.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; font-size: 0.85rem;">
+        <div style="padding: 14px; background: rgba(5, 18, 12, 0.65); border-radius: 12px; border: 1px solid rgba(74, 222, 128, 0.22);">
+          <div style="font-weight: 700; color: #4ade80;">🚲 Green Commute</div>
+          <div style="color: #ffffff; font-weight: 600; margin: 2px 0;">0.171 kg CO₂e avoided per km</div>
+          <div style="font-size: 0.75rem; color: rgba(240, 253, 244, 0.65);">DEFRA Passenger Car Average Combustion Factor.</div>
+        </div>
+
+        <div style="padding: 14px; background: rgba(5, 18, 12, 0.65); border-radius: 12px; border: 1px solid rgba(74, 222, 128, 0.22);">
+          <div style="font-weight: 700; color: #38bdf8;">🌳 Tree Sequestration</div>
+          <div style="color: #ffffff; font-weight: 600; margin: 2px 0;">21.77 kg CO₂ absorbed per tree/year</div>
+          <div style="font-size: 0.75rem; color: rgba(240, 253, 244, 0.65);">US Environmental Protection Agency (EPA) Tables.</div>
+        </div>
+
+        <div style="padding: 14px; background: rgba(5, 18, 12, 0.65); border-radius: 12px; border: 1px solid rgba(74, 222, 128, 0.22);">
+          <div style="font-weight: 700; color: #facc15;">💡 Electricity Conservation</div>
+          <div style="color: #ffffff; font-weight: 600; margin: 2px 0;">0.82 kg CO₂e saved per kWh</div>
+          <div style="font-size: 0.75rem; color: rgba(240, 253, 244, 0.65);">Central Electricity Authority Baseline Factor.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================
+       MODAL 5: OFFICIAL CERTIFICATE PREVIEW
+       ======================================================================== -->
+  <div id="certificate-modal" class="modal-overlay" onclick="closeModalOnBackdrop(event, 'certificate-modal')">
+    <div class="modal-card" style="max-width: 660px; padding: 0; background: #06170e; border: 2px solid rgba(74, 222, 128, 0.45); overflow: hidden;">
+      <button class="modal-close-btn" style="top: 14px; right: 14px; z-index: 10;" onclick="closeModal('certificate-modal')">✕</button>
+
+      <div style="padding: 44px 38px; text-align: center; border: 12px double rgba(74, 222, 128, 0.35); margin: 12px; background: radial-gradient(circle, #081d13 0%, #05140d 100%);">
+        <div style="font-size: 2.6rem; margin-bottom: 6px;">🏛️</div>
+        <div style="color: #4ade80; font-size: 0.85rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;">
+          INSTITUTE ACCREDITATION BOARD FOR SUSTAINABILITY
+        </div>
+        <h2 style="font-size: 1.85rem; font-weight: 900; color: #ffffff; margin: 12px 0 6px;">
+          Certificate of Environmental Impact
+        </h2>
+        <div style="width: 80px; height: 3px; background: #22c55e; margin: 0 auto 18px; border-radius: 99px;"></div>
+
+        <p style="font-size: 0.88rem; color: rgba(240, 253, 244, 0.75);">
+          This official document certifies that
+        </p>
+
+        <h3 style="font-size: 1.8rem; font-weight: 800; color: #ffffff; margin: 10px 0; text-decoration: underline decoration-color: #22c55e;">
+          Alex Rivera
+        </h3>
+
+        <p style="font-size: 0.86rem; color: rgba(240, 253, 244, 0.8); max-width: 480px; margin: 0 auto 20px; line-height: 1.5;">
+          has successfully fulfilled <b>68 Verified College Activity Points</b> through verified carbon emission reduction, waste management drives, and green campus stewardship.
+        </p>
+
+        <div style="display: flex; justify-content: space-around; align-items: center; border-top: 1px solid rgba(74, 222, 128, 0.2); padding-top: 20px; margin-top: 20px;">
+          <div style="text-align: left;">
+            <div style="font-size: 0.7rem; color: #a7f3d0;">ISSUE DATE</div>
+            <div style="font-weight: 700; color: #ffffff; font-size: 0.85rem;">October 4, 2026</div>
+            <div style="font-size: 0.68rem; color: rgba(240, 253, 244, 0.55); margin-top: 2px;">CREDENTIAL: ECO-8942-VERIFIED</div>
+          </div>
+
+          <div style="width: 68px; height: 68px; border-radius: 50%; border: 2px dashed #4ade80; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 800; color: #4ade80; text-align: center; padding: 4px;">
+            OFFICIAL<br>SEAL
+          </div>
+
+          <div style="text-align: right;">
+            <div style="font-size: 0.7rem; color: #a7f3d0;">FACULTY ADVISOR</div>
+            <div style="font-weight: 700; color: #ffffff; font-size: 0.85rem;">Dr. Eleanor Vance</div>
+            <div style="font-size: 0.68rem; color: #4ade80; margin-top: 2px;">Dean of Sustainability</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding: 16px 24px; background: rgba(5, 17, 11, 0.95); display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid rgba(74, 222, 128, 0.2);">
+        <button onclick="window.print()" class="btn-primary-gradient" style="padding: 8px 20px; font-size: 0.85rem;">
+          🖨️ Print / Save as PDF
+        </button>
+        <button onclick="closeModal('certificate-modal')" class="btn-secondary-glass" style="padding: 8px 18px; font-size: 0.85rem;">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================
+       TOAST POPUP
+       ======================================================================== -->
+  <div id="toast" class="toast-popup">
+    <span style="font-size: 1.3rem;">🌱</span>
+    <span id="toast-msg">Activity recorded successfully!</span>
+  </div>
+
+
+  <!-- ========================================================================
+       JAVASCRIPT LOGIC ENGINE
+       ======================================================================== -->
+  <script>
+    let authMode = 'login';
+    let currentRole = 'student';
+
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('open');
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('open');
+    }
+
+    function closeModalOnBackdrop(e, id) {
+      if (e.target.id === id) {
+        closeModal(id);
+      }
+    }
+
+    function openAuthModal(mode) {
+      authMode = mode;
+      const title = document.getElementById('auth-modal-title');
+      const subtitle = document.getElementById('auth-modal-subtitle');
+      const btn = document.getElementById('auth-submit-btn');
+      const nameGroup = document.getElementById('auth-name-group');
+      const toggleText = document.getElementById('auth-toggle-text');
+      const toggleLink = document.getElementById('auth-toggle-link');
+
+      if (mode === 'register') {
+        title.textContent = 'Create EcoTrack Account';
+        subtitle.textContent = 'Join your campus sustainability community.';
+        btn.textContent = 'Sign Up';
+        nameGroup.style.display = 'block';
+        toggleText.textContent = 'Already have an account?';
+        toggleLink.textContent = 'Sign In';
+      } else {
+        title.textContent = 'Sign In to EcoTrack';
+        subtitle.textContent = 'Access your verified environmental logs and college points.';
+        btn.textContent = 'Sign In';
+        nameGroup.style.display = 'none';
+        toggleText.textContent = "Don't have an account?";
+        toggleLink.textContent = 'Sign Up';
+      }
+      openModal('auth-modal');
+    }
+
+    function toggleAuthMode() {
+      openAuthModal(authMode === 'login' ? 'register' : 'login');
+    }
+
+    function setRole(role, btn) {
+      document.querySelectorAll('.role-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentRole = role;
+      const emailInput = document.getElementById('auth-email-input');
+      if (role === 'student') emailInput.value = 'alex.rivera@university.edu';
+      if (role === 'faculty') emailInput.value = 'dr.vance@university.edu';
+      if (role === 'admin') emailInput.value = 'sustainability.admin@university.edu';
+    }
+
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      closeModal('auth-modal');
+      showToast(`Welcome back, Alex Rivera! Signed in as ${currentRole.toUpperCase()}.`);
+    }
+
+    function quickDemoLogin() {
+      closeModal('auth-modal');
+      showToast('⚡ Quick Demo Login: Signed in as Alex Rivera');
+    }
+
+    function openActivityCalculatorModal() {
+      openModal('calculator-modal');
+      updateModalCalc();
+    }
+
+    function openReportIssueModal() {
+      openModal('report-modal');
+    }
+
+    function openCertificateModal() {
+      openModal('certificate-modal');
+    }
+
+    function updateModalCalc() {
+      const cat = document.getElementById('modal-act-cat').value;
+      const qtyInput = document.getElementById('modal-act-qty');
+      const unitLabel = document.getElementById('modal-act-unit-label');
+      const co2Display = document.getElementById('modal-co2-val');
+      const ptsDisplay = document.getElementById('modal-pts-val');
+
+      let qty = parseFloat(qtyInput.value) || 0;
+      let co2 = 0;
+      let pts = 0;
+
+      if (cat === 'commute') {
+        unitLabel.textContent = 'Distance (km)';
+        co2 = (qty * 0.171).toFixed(2);
+        pts = Math.round(qty * 1);
+      } else if (cat === 'tree') {
+        unitLabel.textContent = 'Saplings Planted';
+        co2 = (qty * 21.77).toFixed(2);
+        pts = Math.round(qty * 10);
+      } else if (cat === 'energy') {
+        unitLabel.textContent = 'Electricity Saved (kWh)';
+        co2 = (qty * 0.82).toFixed(2);
+        pts = Math.round(qty * 0.5);
+      } else if (cat === 'waste') {
+        unitLabel.textContent = 'Waste Recycled (kg)';
+        co2 = (qty * 1.5).toFixed(2);
+        pts = Math.round(qty * 2);
+      }
+
+      co2Display.innerHTML = `${co2} <span style="font-size: 1.1rem; color: #4ade80;">kg CO₂e</span>`;
+      ptsDisplay.textContent = `+${pts} pts`;
+    }
+
+    function handleModalActivitySubmit(e) {
+      e.preventDefault();
+      closeModal('calculator-modal');
+      showToast('Activity submitted! Under faculty review for credit points.');
+    }
+
+    function handleModalIssueSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('m-issue-title').value;
+      const loc = document.getElementById('m-issue-loc').value;
+      const desc = document.getElementById('m-issue-desc').value;
+      const sev = document.getElementById('m-issue-sev').value;
+
+      const grid = document.getElementById('issues-grid');
+      const newCard = document.createElement('div');
+      newCard.className = 'glass-panel';
+      newCard.setAttribute('data-severity', sev);
+      newCard.innerHTML = `
+        <div style="height: 190px; position: relative; overflow: hidden; background: #0b1a13;">
+          <img src="assets/issue-sample-4.jpg" alt="Hazard" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='client/public/assets/issue-sample-4.jpg'">
+          <div style="position: absolute; top: 12px; left: 12px; background: ${sev === 'urgent' ? 'rgba(239, 68, 68, 0.92)' : 'rgba(234, 179, 8, 0.92)'}; color: #fff; padding: 4px 10px; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 700;">
+            ${sev.toUpperCase()}
+          </div>
+          <div style="position: absolute; top: 12px; right: 12px; background: rgba(0, 0, 0, 0.72); color: #fff; padding: 4px 10px; border-radius: var(--radius-full); font-size: 0.75rem;">
+            Just Now
+          </div>
+        </div>
+        <div style="padding: 22px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: #a7f3d0; margin-bottom: 6px;">
+            <span>📍 ${loc}</span> • <span>Just now</span>
+          </div>
+          <h4 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 8px;">
+            ${title}
+          </h4>
+          <p style="font-size: 0.82rem; color: rgba(240, 253, 244, 0.75); line-height: 1.5; margin-bottom: 18px;">
+            ${desc}
+          </p>
+          <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(74, 222, 128, 0.15); padding-top: 14px;">
+            <button onclick="upvoteIssue(this)" class="glass-pill" style="padding: 6px 14px; font-size: 0.8rem; gap: 6px;">
+              <span>▲ Upvote</span> <span class="vote-count">1</span>
+            </button>
+            <span style="font-size: 0.78rem; color: #4ade80;">Dispatched to Response Team</span>
+          </div>
+        </div>
+      `;
+      grid.prepend(newCard);
+      closeModal('report-modal');
+      showToast('Hazard reported successfully and dispatched to facility response team!');
+    }
+
+    function upvoteIssue(btn) {
+      const countEl = btn.querySelector('.vote-count');
+      let count = parseInt(countEl.textContent) || 0;
+      countEl.textContent = count + 1;
+      btn.style.borderColor = '#4ade80';
+      btn.style.color = '#4ade80';
+      showToast('Upvoted! Issue priority escalated.');
+    }
+
+    function toggleJoinCampaign(btn) {
+      if (btn.textContent.includes('Joined')) {
+        btn.textContent = 'Join Campaign';
+        btn.style.background = 'linear-gradient(135deg, #4ade80 0%, #22c55e 55%, #15803d 100%)';
+        btn.style.color = '#042413';
+        showToast('Left campaign.');
+      } else {
+        btn.textContent = 'Joined ✓';
+        btn.style.background = 'rgba(34, 197, 94, 0.25)';
+        btn.style.color = '#4ade80';
+        btn.style.border = '1px solid #4ade80';
+        showToast('Congratulations! Joined sustainability campaign.');
+      }
+    }
+
+    function toggleTheme() {
+      if (document.body.classList.contains('dark-theme')) {
+        document.body.classList.remove('dark-theme');
+        document.body.classList.add('light-theme');
+        document.getElementById('theme-icon').innerHTML = '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>';
+      } else {
+        document.body.classList.remove('light-theme');
+        document.body.classList.add('dark-theme');
+        document.getElementById('theme-icon').innerHTML = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>';
+      }
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const msg = document.getElementById('toast-msg');
+      if (toast && msg) {
+        msg.textContent = message;
+        toast.style.display = 'flex';
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 3600);
+      }
+    }
+
+    // Canvas Particles
+    function initHeroCanvas() {
+      const canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      const resize = () => {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+      };
+      resize();
+      window.addEventListener('resize', resize);
+
+      const particles = [];
+      const count = 45;
+
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2.5 + 1,
+          speedX: (Math.random() - 0.5) * 0.4,
+          speedY: -Math.random() * 0.6 - 0.2,
+          opacity: Math.random() * 0.7 + 0.2,
+          isLeaf: i % 4 === 0,
+          angle: Math.random() * Math.PI * 2,
+          angularSpeed: (Math.random() - 0.5) * 0.02
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach(p => {
+          p.x += p.speedX;
+          p.y += p.speedY;
+          p.angle += p.angularSpeed;
+
+          if (p.y < -10) {
+            p.y = canvas.height + 10;
+            p.x = Math.random() * canvas.width;
+          }
+          if (p.x < -10) p.x = canvas.width + 10;
+          if (p.x > canvas.width + 10) p.x = -10;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.angle);
+
+          if (p.isLeaf) {
+            ctx.beginPath();
+            ctx.ellipse(0, 0, p.size * 2, p.size, Math.PI / 4, 0, 2 * Math.PI);
+            ctx.fillStyle = `rgba(74, 222, 128, ${p.opacity * 0.6})`;
+            ctx.fill();
+          } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(134, 239, 172, ${p.opacity})`;
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = '#22c55e';
+            ctx.fill();
+          }
+          ctx.restore();
+        });
+
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initHeroCanvas();
+    });
+  </script>
+</body>
+</html>
