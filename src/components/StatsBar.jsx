@@ -10,17 +10,17 @@ export default function StatsBar() {
     campaigns: 0,
   });
 
-  // Animated counter on mount
+  // Animated counter on mount (animates from zero to zero)
   useEffect(() => {
     const targets = {
-      activities: 10,
-      users: 2,
-      issues: 500,
-      campaigns: 30,
+      activities: 0,
+      users: 0,
+      issues: 0,
+      campaigns: 0,
     };
 
     let start = 0;
-    const duration = 1600; // ms
+    const duration = 1200; // ms
     const steps = 30;
     const stepTime = duration / steps;
 
@@ -49,25 +49,25 @@ export default function StatsBar() {
     {
       id: 'activities',
       icon: Leaf,
-      value: `${counts.activities}K+`,
+      value: `${counts.activities}`,
       label: 'Activities Tracked',
     },
     {
       id: 'users',
       icon: Users,
-      value: `${counts.users}K+`,
+      value: `${counts.users}`,
       label: 'Active Users',
     },
     {
       id: 'issues',
       icon: Trees,
-      value: `${counts.issues}+`,
+      value: `${counts.issues}`,
       label: 'Issues Resolved',
     },
     {
       id: 'campaigns',
       icon: BarChart3,
-      value: `${counts.campaigns}+`,
+      value: `${counts.campaigns}`,
       label: 'Ongoing Campaigns',
     },
   ];
