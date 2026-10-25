@@ -1,15 +1,28 @@
 {
-  "name": "ecotrack-workspace",
-  "version": "1.0.0",
+  "name": "ecotrack",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
-    "start:server": "npm --prefix server run start",
-    "start:client": "npm --prefix client run dev",
-    "build:client": "npm --prefix client run build",
-    "serve:website": "npx -y serve ."
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "oxlint",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.4",
+    "framer-motion": "^14.6.0",
+    "lucide-react": "^1.61.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
-    "concurrently": "^10.0.5"
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "oxlint": "^1.88.0",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.3.4"
   }
 }
