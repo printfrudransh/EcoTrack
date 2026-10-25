@@ -104,7 +104,7 @@ export default function App() {
       />
 
       {/* 3. Main Fullscreen Composition */}
-      <main className="relative z-10 flex-1 flex flex-col justify-center px-6 sm:px-10 lg:px-14 xl:px-20 max-w-[1600px] mx-auto w-full py-4">
+      <main className="relative z-10 flex-1 flex flex-col justify-center px-6 sm:px-10 lg:px-14 xl:px-20 max-w-[1600px] mx-auto w-full py-2 sm:py-3">
         
         {/* Fullscreen Row: Hero Text & Stats (Left), Earth (Center/Back), Login Card (Right) */}
         <div className="relative flex-1 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4 my-auto">
@@ -118,7 +118,7 @@ export default function App() {
 
           {/* CENTER: Glowing Animated Earth (Layered between hero & login card, matching reference layout) */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 overflow-visible lg:translate-x-[4%]">
-            <div className="w-[340px] sm:w-[500px] md:w-[620px] lg:w-[760px] xl:w-[880px] pointer-events-auto">
+            <div className="w-[340px] sm:w-[500px] md:w-[620px] lg:w-[760px] xl:w-[860px] pointer-events-auto">
               <AnimatedEarth onSelectFeature={handleFeatureSelect} />
             </div>
           </div>

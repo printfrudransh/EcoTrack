@@ -52,8 +52,8 @@ export default function LoginCard({ onToast }) {
       setIsLoading(false);
       // Trigger festive celebration confetti
       confetti({
-        particleCount: 50,
-        spread: 60,
+        particleCount: 55,
+        spread: 65,
         origin: { y: 0.7 },
         colors: ['#B7FF91', '#59E39C', '#22C55E', '#ffffff'],
       });
@@ -94,23 +94,23 @@ export default function LoginCard({ onToast }) {
       transition={{ duration: 0.8, delay: 0.3 }}
       className="relative z-30 w-full max-w-[420px] select-none"
     >
-      {/* 1. Subtle Emerald Ambient Halo behind the Login Card */}
+      {/* 1. Luminous Emerald Ambient Halo behind the Login Card */}
       <div 
-        className="absolute -inset-2 rounded-[36px] bg-gradient-to-b from-[#59E39C]/18 via-[#061F19]/15 to-[#59E39C]/10 blur-xl -z-10 pointer-events-none" 
+        className="absolute -inset-2.5 rounded-[38px] bg-gradient-to-b from-[#59E39C]/22 via-[#061F19]/20 to-[#59E39C]/14 blur-2xl -z-10 pointer-events-none" 
       />
 
-      {/* 2. Glassmorphism Card Container */}
-      <div className="relative rounded-[28px] sm:rounded-[30px] glass-card p-6 sm:p-8 border border-[#59E39C]/25 shadow-[0_20px_50px_rgba(0,0,0,0.65),0_0_30px_rgba(89,227,156,0.1)]">
+      {/* 2. Glassmorphism Card Container matching reference image */}
+      <div className="relative rounded-[28px] sm:rounded-[32px] glass-card p-6 sm:p-8 border border-[#59E39C]/35 shadow-[0_25px_60px_rgba(0,0,0,0.7),0_0_35px_rgba(89,227,156,0.15)]">
         
         {/* Top Header */}
         <div className="flex flex-col items-center text-center mb-6">
-          {/* Leaf Logo Icon matching reference */}
-          <div className="mb-2.5 flex items-center justify-center w-14 h-14 rounded-2xl bg-[#061F19]/85 border border-[#59E39C]/30 shadow-[0_0_18px_rgba(89,227,156,0.25)]">
+          {/* Leaf Logo Icon squircle badge matching reference */}
+          <div className="mb-2.5 flex items-center justify-center w-14 h-14 rounded-2xl bg-[#061F19]/90 border border-[#59E39C]/40 shadow-[0_0_22px_rgba(89,227,156,0.35)]">
             <svg 
               viewBox="0 0 36 36" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
-              className="w-8 h-8 drop-shadow-[0_0_8px_rgba(89,227,156,0.8)]"
+              className="w-8 h-8 drop-shadow-[0_0_10px_rgba(89,227,156,0.9)]"
             >
               <path 
                 d="M32 4C32 4 22 5 13 14C4 23 4 32 4 32C4 32 13 32 22 23C31 14 32 4 32 4Z" 
@@ -138,7 +138,7 @@ export default function LoginCard({ onToast }) {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          {/* Sign Up Name Field (Animated in when in Sign Up mode) */}
+          {/* Sign Up Name Field */}
           <AnimatePresence>
             {isSignUpMode && (
               <motion.div
@@ -150,7 +150,7 @@ export default function LoginCard({ onToast }) {
               >
                 <div className="relative flex items-center">
                   <span className="absolute left-4 text-gray-400">
-                    <Sparkles className="w-5 h-5 text-[#59E39C]/70" />
+                    <Sparkles className="w-5 h-5 text-[#59E39C]" />
                   </span>
                   <input
                     type="text"
@@ -160,10 +160,10 @@ export default function LoginCard({ onToast }) {
                       if (errors.name) setErrors((prev) => ({ ...prev, name: null }));
                     }}
                     placeholder="Full name"
-                    className={`w-full bg-[#061F19]/80 text-white placeholder-gray-400 text-sm sm:text-base rounded-xl pl-12 pr-4 py-3 border transition-all duration-200 focus:outline-none ${
+                    className={`w-full bg-[#061F19]/85 text-white placeholder-gray-400 text-sm sm:text-base rounded-xl pl-12 pr-4 py-3 border transition-all duration-200 focus:outline-none ${
                       errors.name 
                         ? 'border-red-400 focus:ring-1 focus:ring-red-400' 
-                        : 'border-[#2D5A4C]/60 focus:border-[#59E39C] focus:ring-1 focus:ring-[#59E39C]/50'
+                        : 'border-[#2D5A4C]/70 focus:border-[#59E39C] focus:ring-1 focus:ring-[#59E39C]/60'
                     }`}
                   />
                 </div>
@@ -190,10 +190,10 @@ export default function LoginCard({ onToast }) {
                   if (errors.email) setErrors((prev) => ({ ...prev, email: null }));
                 }}
                 placeholder="Email address"
-                className={`w-full bg-[#061F19]/80 text-white placeholder-gray-400 text-sm sm:text-base rounded-xl pl-12 pr-4 py-3 border transition-all duration-200 focus:outline-none ${
+                className={`w-full bg-[#061F19]/85 text-white placeholder-gray-400 text-sm sm:text-base rounded-xl pl-12 pr-4 py-3 border transition-all duration-200 focus:outline-none ${
                   errors.email 
                     ? 'border-red-400 focus:ring-1 focus:ring-red-400' 
-                    : 'border-[#2D5A4C]/60 focus:border-[#59E39C] focus:ring-1 focus:ring-[#59E39C]/50'
+                    : 'border-[#2D5A4C]/70 focus:border-[#59E39C] focus:ring-1 focus:ring-[#59E39C]/60'
                 }`}
               />
             </div>
@@ -218,10 +218,10 @@ export default function LoginCard({ onToast }) {
                   if (errors.password) setErrors((prev) => ({ ...prev, password: null }));
                 }}
                 placeholder="Password"
-                className={`w-full bg-[#061F19]/80 text-white placeholder-gray-400 text-sm sm:text-base rounded-xl pl-12 pr-12 py-3 border transition-all duration-200 focus:outline-none ${
+                className={`w-full bg-[#061F19]/85 text-white placeholder-gray-400 text-sm sm:text-base rounded-xl pl-12 pr-12 py-3 border transition-all duration-200 focus:outline-none ${
                   errors.password 
                     ? 'border-red-400 focus:ring-1 focus:ring-red-400' 
-                    : 'border-[#2D5A4C]/60 focus:border-[#59E39C] focus:ring-1 focus:ring-[#59E39C]/50'
+                    : 'border-[#2D5A4C]/70 focus:border-[#59E39C] focus:ring-1 focus:ring-[#59E39C]/60'
                 }`}
               />
               <button
@@ -268,11 +268,11 @@ export default function LoginCard({ onToast }) {
             </button>
           </div>
 
-          {/* Login Button (Large Lime-to-Emerald Gradient with Arrow) */}
+          {/* Login Button (Bright Lime-to-Emerald Gradient with Glow) */}
           <button
             type="submit"
             disabled={isLoading}
-            className="group relative flex items-center justify-center gap-2 w-full py-3.5 rounded-xl glow-btn-primary font-bold text-base tracking-wide mt-2 cursor-pointer font-['Outfit']"
+            className="group relative flex items-center justify-center gap-2 w-full py-3.5 rounded-xl glow-btn-primary font-bold text-base tracking-wide mt-2 cursor-pointer font-['Outfit'] shadow-[0_0_25px_rgba(183,255,145,0.6)] hover:shadow-[0_0_35px_rgba(183,255,145,0.85)]"
           >
             {isLoading ? (
               <div className="w-5 h-5 border-2 border-[#031611] border-t-transparent rounded-full animate-spin" />
@@ -286,11 +286,11 @@ export default function LoginCard({ onToast }) {
 
           {/* Social Login Divider */}
           <div className="relative flex items-center justify-center my-1.5">
-            <div className="border-t border-[#2D5A4C]/50 w-full" />
+            <div className="border-t border-[#2D5A4C]/60 w-full" />
             <span className="bg-[#0B2B22] px-3 text-xs text-gray-400 font-normal">
               or continue with
             </span>
-            <div className="border-t border-[#2D5A4C]/50 w-full" />
+            <div className="border-t border-[#2D5A4C]/60 w-full" />
           </div>
 
           {/* Social Login 3 Buttons: Google, GitHub, Microsoft */}
@@ -299,7 +299,7 @@ export default function LoginCard({ onToast }) {
             <button
               type="button"
               onClick={() => handleSocialClick('Google')}
-              className="flex items-center justify-center py-2.5 rounded-xl bg-[#061F19]/80 border border-[#2D5A4C]/60 hover:border-[#59E39C]/60 hover:bg-[#061F19] transition-all cursor-pointer shadow-sm hover:shadow-[0_0_12px_rgba(89,227,156,0.2)]"
+              className="flex items-center justify-center py-2.5 rounded-xl bg-[#061F19]/85 border border-[#2D5A4C]/70 hover:border-[#59E39C]/70 hover:bg-[#061F19] transition-all cursor-pointer shadow-sm hover:shadow-[0_0_14px_rgba(89,227,156,0.25)]"
               title="Continue with Google"
               aria-label="Continue with Google"
             >
@@ -327,7 +327,7 @@ export default function LoginCard({ onToast }) {
             <button
               type="button"
               onClick={() => handleSocialClick('GitHub')}
-              className="flex items-center justify-center py-2.5 rounded-xl bg-[#061F19]/80 border border-[#2D5A4C]/60 hover:border-[#59E39C]/60 hover:bg-[#061F19] transition-all cursor-pointer shadow-sm hover:shadow-[0_0_12px_rgba(89,227,156,0.2)] text-white"
+              className="flex items-center justify-center py-2.5 rounded-xl bg-[#061F19]/85 border border-[#2D5A4C]/70 hover:border-[#59E39C]/70 hover:bg-[#061F19] transition-all cursor-pointer shadow-sm hover:shadow-[0_0_14px_rgba(89,227,156,0.25)] text-white"
               title="Continue with GitHub"
               aria-label="Continue with GitHub"
             >
@@ -340,7 +340,7 @@ export default function LoginCard({ onToast }) {
             <button
               type="button"
               onClick={() => handleSocialClick('Microsoft')}
-              className="flex items-center justify-center py-2.5 rounded-xl bg-[#061F19]/80 border border-[#2D5A4C]/60 hover:border-[#59E39C]/60 hover:bg-[#061F19] transition-all cursor-pointer shadow-sm hover:shadow-[0_0_12px_rgba(89,227,156,0.2)]"
+              className="flex items-center justify-center py-2.5 rounded-xl bg-[#061F19]/85 border border-[#2D5A4C]/70 hover:border-[#59E39C]/70 hover:bg-[#061F19] transition-all cursor-pointer shadow-sm hover:shadow-[0_0_14px_rgba(89,227,156,0.25)]"
               title="Continue with Microsoft"
               aria-label="Continue with Microsoft"
             >

@@ -74,38 +74,32 @@ export default function StatsBar() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 25 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.5 }}
-      className="relative z-20 w-full max-w-2xl glass-stat rounded-2xl sm:rounded-3xl py-3 px-4 sm:px-6 select-none"
+      className="relative z-20 w-full max-w-[340px] glass-stat rounded-[20px] p-3.5 sm:p-4 select-none border border-[#59E39C]/30 shadow-[0_15px_35px_rgba(0,0,0,0.55),0_0_20px_rgba(89,227,156,0.12)]"
     >
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-2 items-center">
-        {stats.map((item, index) => {
+      {/* 2x2 Grid matching reference image */}
+      <div className="grid grid-cols-2 gap-x-3 gap-y-3 items-start">
+        {stats.map((item) => {
           const IconComponent = item.icon;
           return (
-            <React.Fragment key={item.id}>
-              <div className="flex items-center gap-2.5 sm:gap-3 group">
-                {/* Glowing Icon */}
-                <div className="flex-shrink-0 text-[#59E39C] group-hover:text-[#B7FF91] drop-shadow-[0_0_8px_rgba(89,227,156,0.5)] transition-all">
-                  <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:scale-110" />
-                </div>
-
-                {/* Numbers and Labels */}
-                <div className="flex flex-col">
-                  <span className="text-lg sm:text-xl font-bold text-white font-['Outfit'] tracking-tight group-hover:text-[#B7FF91] transition-colors leading-none">
-                    {item.value}
-                  </span>
-                  <span className="text-[11px] sm:text-xs text-gray-300 font-normal mt-0.5 leading-tight">
-                    {item.label}
-                  </span>
-                </div>
+            <div key={item.id} className="flex items-start gap-2 group">
+              {/* Glowing Icon */}
+              <div className="flex-shrink-0 text-[#59E39C] group-hover:text-[#B7FF91] drop-shadow-[0_0_10px_rgba(89,227,156,0.6)] transition-all mt-0.5">
+                <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:scale-110" />
               </div>
 
-              {/* Vertical divider on desktop, hidden on the last item */}
-              {index < stats.length - 1 && (
-                <div className="hidden sm:block h-7 w-[1px] bg-[#59E39C]/20 mx-auto" />
-              )}
-            </React.Fragment>
+              {/* Numbers and Labels */}
+              <div className="flex flex-col">
+                <span className="text-base sm:text-lg font-bold text-white font-['Outfit'] tracking-tight group-hover:text-[#B7FF91] transition-colors leading-tight">
+                  {item.value}
+                </span>
+                <span className="text-[11px] text-gray-300 font-normal leading-tight mt-0.5">
+                  {item.label}
+                </span>
+              </div>
+            </div>
           );
         })}
       </div>

@@ -38,9 +38,9 @@ export default function HeroSection({ onFeatureClick }) {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="mb-2.5"
+        className="mb-2"
       >
-        <span className="text-[#59E39C] text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase font-['Outfit'] inline-block drop-shadow-[0_0_8px_rgba(89,227,156,0.5)]">
+        <span className="text-[#59E39C] text-xs sm:text-[13px] font-semibold tracking-[0.25em] uppercase font-['Outfit'] inline-block drop-shadow-[0_0_8px_rgba(89,227,156,0.6)]">
           OUR PLANET. OUR RESPONSIBILITY.
         </span>
       </motion.div>
@@ -50,7 +50,7 @@ export default function HeroSection({ onFeatureClick }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}
-        className="text-4xl sm:text-5xl lg:text-[62px] xl:text-[68px] font-extrabold tracking-tight leading-[1.08] mb-3.5 font-['Outfit']"
+        className="text-4xl sm:text-5xl lg:text-[54px] xl:text-[60px] font-extrabold tracking-tight leading-[1.06] mb-3 font-['Outfit']"
       >
         <span className="text-white block">Track Today</span>
         <span className="block">
@@ -69,7 +69,7 @@ export default function HeroSection({ onFeatureClick }) {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.3 }}
-        className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-md mb-5 font-normal"
+        className="text-gray-300 text-sm sm:text-[15px] leading-relaxed max-w-md mb-4 font-normal"
       >
         Record your actions, report environmental issues, and create real impact together.
       </motion.p>
@@ -79,7 +79,7 @@ export default function HeroSection({ onFeatureClick }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.4 }}
-        className="flex flex-col gap-2.5 max-w-xs sm:max-w-sm mb-6"
+        className="flex flex-col gap-2 max-w-xs sm:max-w-sm mb-4"
       >
         {featureButtons.map((btn) => {
           const IconComponent = btn.icon;
@@ -87,13 +87,13 @@ export default function HeroSection({ onFeatureClick }) {
             <motion.button
               key={btn.id}
               onClick={() => onFeatureClick?.(btn)}
-              whileHover={{ x: 8 }}
+              whileHover={{ x: 6 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-              className="group relative flex items-center gap-3.5 px-4 sm:px-5 py-2.5 rounded-full glass-pill cursor-pointer focus:outline-none"
+              className="group relative flex items-center gap-3 px-4 py-2 sm:py-2.5 rounded-full glass-pill cursor-pointer focus:outline-none border border-[#59E39C]/30 hover:border-[#59E39C]/70 shadow-sm"
             >
               {/* Icon Container with subtle green glow */}
-              <div className="flex items-center justify-center w-7 h-7 rounded-full bg-[#031611]/60 text-[#59E39C] group-hover:text-[#B7FF91] transition-colors border border-[#59E39C]/30 group-hover:border-[#59E39C]/80 shadow-[0_0_10px_rgba(89,227,156,0.15)] group-hover:shadow-[0_0_15px_rgba(89,227,156,0.4)]">
+              <div className="flex items-center justify-center w-7 h-7 rounded-full bg-[#031611]/70 text-[#59E39C] group-hover:text-[#B7FF91] transition-colors border border-[#59E39C]/35 group-hover:border-[#59E39C]/80 shadow-[0_0_10px_rgba(89,227,156,0.2)]">
                 <IconComponent className="w-4 h-4 transition-transform group-hover:scale-110" />
               </div>
 
@@ -111,7 +111,7 @@ export default function HeroSection({ onFeatureClick }) {
         })}
       </motion.div>
 
-      {/* 5. Bottom Statistics Bar (Integrated under buttons matching reference composition) */}
+      {/* 5. 2x2 Bottom Statistics Panel */}
       <div className="w-full">
         <StatsBar />
       </div>
