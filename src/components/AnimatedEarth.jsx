@@ -8,8 +8,8 @@ export default function AnimatedEarth({ onSelectFeature }) {
   useEffect(() => {
     const handleMouseMove = (e) => {
       const { innerWidth, innerHeight } = window;
-      const x = (e.clientX / innerWidth - 0.5) * 12;
-      const y = (e.clientY / innerHeight - 0.5) * 12;
+      const x = (e.clientX / innerWidth - 0.5) * 10;
+      const y = (e.clientY / innerHeight - 0.5) * 10;
       setMousePos({ x, y });
     };
 
@@ -19,20 +19,20 @@ export default function AnimatedEarth({ onSelectFeature }) {
 
   return (
     <div className="relative flex items-center justify-center w-full h-full select-none pointer-events-none">
-      {/* 1. Subtle Cyan-Green Atmospheric Rim Glow (Enhances separation from forest background) */}
+      {/* 1. Subtle Cyan-Green Atmospheric Rim Glow (Gentle separation from forest background) */}
       <div 
-        className="absolute w-[440px] h-[440px] sm:w-[580px] sm:h-[580px] lg:w-[720px] lg:h-[720px] rounded-full blur-[75px] opacity-35 animate-pulse-glow pointer-events-none"
+        className="absolute w-[440px] h-[440px] sm:w-[560px] sm:h-[560px] lg:w-[680px] lg:h-[680px] rounded-full blur-[70px] opacity-35 animate-pulse-glow pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(89, 227, 156, 0.3) 40%, rgba(6, 31, 25, 0.1) 65%, transparent 75%)',
+          background: 'radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(89, 227, 156, 0.28) 40%, rgba(6, 31, 25, 0.08) 65%, transparent 75%)',
         }}
       />
 
-      {/* 2. Floating Animated Container with gentle parallax */}
+      {/* 2. Floating Animated Container with subtle parallax */}
       <motion.div
         className="relative flex items-center justify-center pointer-events-auto cursor-pointer"
         animate={{
-          y: [0, -8, 0],
-          rotate: [0, 0.6, 0, -0.6, 0],
+          y: [0, -7, 0],
+          rotate: [0, 0.5, 0, -0.5, 0],
         }}
         transition={{
           duration: 9,
@@ -44,10 +44,10 @@ export default function AnimatedEarth({ onSelectFeature }) {
           transition: 'transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1)',
         }}
       >
-        {/* 3. Refined, Restrained SVG Orbit Lines (Thin, elegant, low visual clutter) */}
+        {/* 3. Refined, Restrained SVG Orbit Lines (Ultra-fine, non-distracting) */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           {/* Ring 1 - Slanted Clockwise Orbit */}
-          <div className="absolute w-[500px] h-[500px] sm:w-[620px] sm:h-[620px] lg:w-[750px] lg:h-[750px] animate-spin-orbit opacity-45">
+          <div className="absolute w-[490px] h-[490px] sm:w-[600px] sm:h-[600px] lg:w-[730px] lg:h-[730px] animate-spin-orbit opacity-40">
             <svg viewBox="0 0 500 500" className="w-full h-full">
               <ellipse
                 cx="250"
@@ -56,22 +56,22 @@ export default function AnimatedEarth({ onSelectFeature }) {
                 ry="130"
                 fill="none"
                 stroke="url(#orbitGradient1)"
-                strokeWidth="1.1"
-                strokeDasharray="8 28"
+                strokeWidth="0.9"
+                strokeDasharray="8 30"
                 transform="rotate(-25 250 250)"
               />
               <defs>
                 <linearGradient id="orbitGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#59E39C" stopOpacity="0.75" />
-                  <stop offset="50%" stopColor="#38BDF8" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#22C55E" stopOpacity="0.6" />
+                  <stop offset="0%" stopColor="#59E39C" stopOpacity="0.7" />
+                  <stop offset="50%" stopColor="#38BDF8" stopOpacity="0.2" />
+                  <stop offset="100%" stopColor="#22C55E" stopOpacity="0.55" />
                 </linearGradient>
               </defs>
             </svg>
           </div>
 
           {/* Ring 2 - Opposite Counter-Clockwise Orbit */}
-          <div className="absolute w-[470px] h-[470px] sm:w-[590px] sm:h-[590px] lg:w-[710px] lg:h-[710px] animate-spin-orbit-reverse opacity-35">
+          <div className="absolute w-[460px] h-[460px] sm:w-[570px] sm:h-[570px] lg:w-[690px] lg:h-[690px] animate-spin-orbit-reverse opacity-30">
             <svg viewBox="0 0 500 500" className="w-full h-full">
               <ellipse
                 cx="250"
@@ -80,15 +80,15 @@ export default function AnimatedEarth({ onSelectFeature }) {
                 ry="140"
                 fill="none"
                 stroke="url(#orbitGradient2)"
-                strokeWidth="0.9"
-                strokeDasharray="6 32"
+                strokeWidth="0.75"
+                strokeDasharray="6 36"
                 transform="rotate(35 250 250)"
               />
               <defs>
                 <linearGradient id="orbitGradient2" x1="0%" y1="100%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#B7FF91" stopOpacity="0.7" />
-                  <stop offset="60%" stopColor="#59E39C" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#0B2B22" stopOpacity="0.05" />
+                  <stop offset="0%" stopColor="#B7FF91" stopOpacity="0.65" />
+                  <stop offset="60%" stopColor="#59E39C" stopOpacity="0.18" />
+                  <stop offset="100%" stopColor="#0B2B22" stopOpacity="0.04" />
                 </linearGradient>
               </defs>
             </svg>
@@ -97,19 +97,19 @@ export default function AnimatedEarth({ onSelectFeature }) {
 
         {/* 4. The Earth with Glowing Eco Network Asset */}
         <motion.div
-          className="relative z-10 w-full max-w-[620px] sm:max-w-[720px] lg:max-w-[830px] xl:max-w-[890px]"
+          className="relative z-10 w-full max-w-[620px] sm:max-w-[710px] lg:max-w-[800px] xl:max-w-[860px]"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
-          whileHover={{ scale: 1.015 }}
+          whileHover={{ scale: 1.012 }}
         >
           <img
             src={earthAsset}
             alt="Connected Earth - Neon Eco Network"
-            className="w-full h-auto object-contain pointer-events-auto drop-shadow-[0_0_40px_rgba(89,227,156,0.35)]"
+            className="w-full h-auto object-contain pointer-events-auto drop-shadow-[0_0_35px_rgba(89,227,156,0.3)]"
           />
 
-          {/* Calmer, Soft Light Pulses on Earth Node Junctions */}
+          {/* Calm, Soft Light Pulses on Earth Node Junctions */}
           <span 
             className="absolute top-[28%] left-[43%] w-2 h-2 rounded-full bg-white shadow-[0_0_8px_#59E39C,0_0_16px_#38BDF8] animate-pulse opacity-75"
             style={{ animationDuration: '3.5s' }}

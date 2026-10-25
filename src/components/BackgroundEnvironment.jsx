@@ -2,109 +2,129 @@ import React, { useMemo } from 'react';
 import forestBg from '../assets/forest-canopy.png';
 
 export default function BackgroundEnvironment() {
-  // Gentle, high-end floating firefly bokeh orbs (calm, restrained motion)
+  // Calm, slow-drifting firefly bokeh particles
   const particles = useMemo(() => {
-    return Array.from({ length: 18 }).map((_, i) => ({
+    return Array.from({ length: 16 }).map((_, i) => ({
       id: i,
-      x: 8 + Math.random() * 84,
-      y: 10 + Math.random() * 80,
+      x: 10 + Math.random() * 80,
+      y: 12 + Math.random() * 76,
       size: Math.random() * 3 + 2,
-      duration: Math.random() * 8 + 18, // 18s - 26s (slow & calming)
-      delay: Math.random() * 6,
-      glow: Math.random() > 0.5 ? 'rgba(183, 255, 145, 0.7)' : 'rgba(89, 227, 156, 0.6)',
+      duration: Math.random() * 8 + 20, // 20s - 28s: very slow and elegant
+      delay: Math.random() * 8,
+      glow: Math.random() > 0.5 ? 'rgba(183, 255, 145, 0.65)' : 'rgba(89, 227, 156, 0.55)',
     }));
   }, []);
 
-  // Floating ambient leaves drifting gracefully through the forest canopy
+  // Floating ambient canopy leaves (subtle sway & drift)
   const leaves = useMemo(() => {
     return [
-      { id: 1, left: 14, duration: 24, delay: 0, scale: 0.8 },
-      { id: 2, left: 45, duration: 30, delay: 7, scale: 0.65 },
-      { id: 3, left: 78, duration: 26, delay: 13, scale: 0.9 },
-      { id: 4, left: 88, duration: 28, delay: 4, scale: 0.7 },
+      { id: 1, left: 16, duration: 28, delay: 0, scale: 0.75 },
+      { id: 2, left: 42, duration: 34, delay: 9, scale: 0.6 },
+      { id: 3, left: 74, duration: 30, delay: 16, scale: 0.8 },
+      { id: 4, left: 86, duration: 32, delay: 5, scale: 0.68 },
     ];
   }, []);
 
-  // Subtle background emerald bokeh circles
+  // Soft emerald bokeh circles creating realistic depth of field
   const bokehOrbs = useMemo(() => {
     return [
-      { id: 1, top: '15%', left: '22%', size: 140, color: 'rgba(89, 227, 156, 0.12)', duration: 14 },
-      { id: 2, top: '65%', left: '18%', size: 200, color: 'rgba(34, 197, 94, 0.08)', duration: 18 },
-      { id: 3, top: '30%', right: '20%', size: 160, color: 'rgba(183, 255, 145, 0.1)', duration: 16 },
-      { id: 4, bottom: '15%', right: '12%', size: 220, color: 'rgba(89, 227, 156, 0.07)', duration: 20 },
+      { id: 1, top: '18%', left: '12%', size: 160, color: 'rgba(89, 227, 156, 0.08)', duration: 16 },
+      { id: 2, top: '60%', left: '25%', size: 220, color: 'rgba(34, 197, 94, 0.06)', duration: 22 },
+      { id: 3, top: '24%', right: '28%', size: 180, color: 'rgba(183, 255, 145, 0.08)', duration: 18 },
+      { id: 4, bottom: '20%', right: '14%', size: 240, color: 'rgba(89, 227, 156, 0.06)', duration: 24 },
     ];
   }, []);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
-      {/* 1. Base Realistic Lush Forest Canopy Background */}
+      {/* 1. Base Realistic Lush Forest Canopy (Detailed Leaves & Branches on Outer Edges) */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 ease-out scale-100"
         style={{
           backgroundImage: `url(${forestBg})`,
-          filter: 'contrast(1.04) brightness(0.96)',
+          filter: 'contrast(1.05) brightness(0.94) saturate(1.08)',
         }}
       />
 
-      {/* 2. Soft Emerald Light Rays (Atmospheric Sunbeams through Canopy) */}
+      {/* 2. Realistic Volumetric Emerald Light Rays (Sunbeams breaking through the tree canopy) */}
+      <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-35 overflow-hidden">
+        {/* Ray 1 */}
+        <div 
+          className="absolute -top-32 right-1/4 w-44 h-[120vh] origin-top -rotate-[26deg] animate-ray-shimmer"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(183, 255, 145, 0.4) 0%, rgba(89, 227, 156, 0.18) 40%, rgba(6, 31, 25, 0) 85%)',
+            filter: 'blur(16px)',
+          }}
+        />
+        {/* Ray 2 */}
+        <div 
+          className="absolute -top-28 right-[15%] w-60 h-[120vh] origin-top -rotate-[26deg] animate-ray-shimmer"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(183, 255, 145, 0.35) 0%, rgba(89, 227, 156, 0.14) 45%, rgba(6, 31, 25, 0) 80%)',
+            filter: 'blur(22px)',
+            animationDelay: '3s',
+          }}
+        />
+        {/* Ray 3 (Broader ambient beam) */}
+        <div 
+          className="absolute -top-36 right-[38%] w-80 h-[120vh] origin-top -rotate-[24deg] opacity-60"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(89, 227, 156, 0.22) 0%, rgba(34, 197, 94, 0.08) 50%, transparent 85%)',
+            filter: 'blur(30px)',
+          }}
+        />
+      </div>
+
+      {/* 3. Middle-Ground Atmospheric Depth Haze */}
       <div 
-        className="absolute -top-20 right-10 w-[700px] h-[700px] pointer-events-none opacity-40 mix-blend-screen"
+        className="absolute inset-0 pointer-events-none opacity-25"
         style={{
-          background: 'radial-gradient(ellipse at 80% 0%, rgba(183, 255, 145, 0.35) 0%, rgba(89, 227, 156, 0.15) 35%, rgba(6, 31, 25, 0) 70%)',
-          transform: 'rotate(-12deg)',
+          background: 'radial-gradient(ellipse 85% 55% at 50% 50%, rgba(6, 31, 25, 0.35) 0%, rgba(3, 22, 17, 0.65) 80%, rgba(3, 22, 17, 0.85) 100%)',
         }}
       />
 
-      {/* 3. Atmospheric Depth Haze & Middle-Ground Mist */}
+      {/* 4. Selective Readability Overlays (Targeted darker shading behind Hero and Login Card) */}
+      {/* Left side: Behind Hero Text & Feature Buttons */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-30"
+        className="absolute inset-y-0 left-0 w-full md:w-[46%] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 90% 60% at 50% 45%, rgba(6, 31, 25, 0.4) 0%, rgba(3, 22, 17, 0.75) 85%)',
+          background: 'linear-gradient(to right, rgba(3, 22, 17, 0.88) 0%, rgba(3, 22, 17, 0.62) 65%, rgba(3, 22, 17, 0) 100%)',
         }}
       />
 
-      {/* 4. Selective Readability Overlays (Targeted darker contrast behind Hero and Login Card) */}
-      {/* Behind Hero Text (Left side) */}
+      {/* Right side: Behind Login Card */}
       <div 
-        className="absolute inset-y-0 left-0 w-full md:w-[48%] pointer-events-none"
+        className="absolute inset-y-0 right-0 w-full md:w-[42%] pointer-events-none"
         style={{
-          background: 'linear-gradient(to right, rgba(3, 22, 17, 0.88) 0%, rgba(3, 22, 17, 0.6) 65%, rgba(3, 22, 17, 0) 100%)',
+          background: 'linear-gradient(to left, rgba(3, 22, 17, 0.82) 0%, rgba(3, 22, 17, 0.48) 60%, rgba(3, 22, 17, 0) 100%)',
         }}
       />
 
-      {/* Behind Login Card (Right side) */}
+      {/* Top Navbar Area Shading */}
       <div 
-        className="absolute inset-y-0 right-0 w-full md:w-[44%] pointer-events-none"
+        className="absolute top-0 inset-x-0 h-28 pointer-events-none"
         style={{
-          background: 'linear-gradient(to left, rgba(3, 22, 17, 0.84) 0%, rgba(3, 22, 17, 0.45) 60%, rgba(3, 22, 17, 0) 100%)',
+          background: 'linear-gradient(to bottom, rgba(3, 22, 17, 0.8) 0%, rgba(3, 22, 17, 0.25) 70%, transparent 100%)',
         }}
       />
 
-      {/* Top navbar readability shading */}
+      {/* Bottom Footer & Stats Shading */}
       <div 
-        className="absolute top-0 inset-x-0 h-32 pointer-events-none"
+        className="absolute bottom-0 inset-x-0 h-24 pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, rgba(3, 22, 17, 0.82) 0%, rgba(3, 22, 17, 0.3) 65%, transparent 100%)',
+          background: 'linear-gradient(to top, rgba(3, 22, 17, 0.82) 0%, rgba(3, 22, 17, 0.2) 75%, transparent 100%)',
         }}
       />
 
-      {/* Bottom screen subtle shadow */}
-      <div 
-        className="absolute bottom-0 inset-x-0 h-28 pointer-events-none"
-        style={{
-          background: 'linear-gradient(to top, rgba(3, 22, 17, 0.85) 0%, rgba(3, 22, 17, 0.25) 70%, transparent 100%)',
-        }}
-      />
-
-      {/* 5. Soft Layered Screen Edge Vignette */}
+      {/* 5. Soft Layered Screen Edge Vignette (Framing corner leaves in deep forest shadow without flattening) */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          boxShadow: 'inset 0 0 110px 40px rgba(3, 22, 17, 0.7)',
+          boxShadow: 'inset 0 0 100px 30px rgba(3, 22, 17, 0.65)',
         }}
       />
 
-      {/* 6. Soft Emerald Bokeh Orbs */}
+      {/* 6. Soft Emerald Bokeh Orbs (Depth of field) */}
       {bokehOrbs.map((orb) => (
         <div
           key={orb.id}
@@ -164,19 +184,34 @@ export default function BackgroundEnvironment() {
 
       {/* Custom Keyframe Animations */}
       <style>{`
+        @keyframes rayShimmer {
+          0%, 100% {
+            opacity: 0.3;
+            transform: rotate(-26deg) translateY(0px);
+          }
+          50% {
+            opacity: 0.45;
+            transform: rotate(-25deg) translateY(-8px);
+          }
+        }
+
+        .animate-ray-shimmer {
+          animation: rayShimmer 8s ease-in-out infinite;
+        }
+
         @keyframes gentleDrift {
           0% {
             transform: translateY(0px) translateX(0px);
             opacity: 0.2;
           }
           30% {
-            opacity: 0.75;
+            opacity: 0.7;
           }
           70% {
-            opacity: 0.65;
+            opacity: 0.6;
           }
           100% {
-            transform: translateY(-90px) translateX(24px);
+            transform: translateY(-80px) translateX(20px);
             opacity: 0;
           }
         }
@@ -193,7 +228,7 @@ export default function BackgroundEnvironment() {
             opacity: 0.3;
           }
           100% {
-            transform: translateY(105vh) rotate(320deg) translateX(50px);
+            transform: translateY(105vh) rotate(320deg) translateX(45px);
             opacity: 0;
           }
         }
@@ -202,7 +237,8 @@ export default function BackgroundEnvironment() {
           .animate-particle-drift,
           .animate-pulse-glow,
           .animate-spin-orbit,
-          .animate-spin-orbit-reverse {
+          .animate-spin-orbit-reverse,
+          .animate-ray-shimmer {
             animation: none !important;
           }
         }
