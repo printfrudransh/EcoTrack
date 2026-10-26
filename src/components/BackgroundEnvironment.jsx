@@ -56,7 +56,7 @@ export default function BackgroundEnvironment() {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
+    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
       {/* 1. Base Realistic Lush Forest Canopy Background (Crisp, detailed foliage with warm golden-green vibrance) */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 ease-out scale-100"

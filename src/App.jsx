@@ -6,7 +6,8 @@ import AnimatedEarth from './components/AnimatedEarth';
 import LoginCard from './components/LoginCard';
 import Toast from './components/Toast';
 import FeatureModal from './components/FeatureModal';
-import { Leaf, TriangleAlert, Users, BarChart3, Mail } from 'lucide-react';
+import AboutSection from './components/AboutSection';
+import { Leaf, TriangleAlert, Users, BarChart3, Mail, Heart } from 'lucide-react';
 
 export default function App() {
   const [activeNav, setActiveNav] = useState('home');
@@ -23,12 +24,13 @@ export default function App() {
 
   const handleNavClick = (id) => {
     setActiveNav(id);
-    if (id === 'features') {
-      setSelectedFeature({
-        title: 'Platform Features',
-        icon: Leaf,
-        description: 'Explore community-driven climate action, intelligent carbon accounting, and verified incident reporting.',
-      });
+    if (id === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (id === 'about' || id === 'features') {
+      const el = document.getElementById('about');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     } else if (id === 'impact') {
       setSelectedFeature({
         title: 'Global Impact Matrix',
@@ -48,11 +50,16 @@ export default function App() {
     showToast({
       type: 'info',
       title: 'Get Started with EcoTrack',
-      message: 'Fill in your credentials on the right card to join the green movement!',
+      message: 'Fill in your credentials on the login card to join the green movement!',
     });
   };
 
-  const handleFeatureSelect = (featureName) => {
+  const handleFeatureSelect = (featureInput) => {
+    if (featureInput && typeof featureInput === 'object') {
+      setSelectedFeature(featureInput);
+      return;
+    }
+
     const featureMap = {
       'Track Activities': {
         title: 'Track Activities',
@@ -81,8 +88,8 @@ export default function App() {
       },
     };
 
-    setSelectedFeature(featureMap[featureName] || {
-      title: featureName,
+    setSelectedFeature(featureMap[featureInput] || {
+      title: featureInput,
       icon: Leaf,
       description: 'Join thousands of proactive citizens taking measurable environmental action today.',
     });
@@ -90,10 +97,7 @@ export default function App() {
 
   return (
     <div className={`relative min-h-screen w-full flex flex-col justify-between overflow-x-hidden ${isDarkMode ? 'dark' : 'nature-mode'}`}>
-      {/* 1. Fullscreen Dark Forest Atmosphere */}
-      <BackgroundEnvironment />
-
-      {/* 2. Transparent Top Navigation Bar */}
+      {/* 1. Transparent Sticky Top Navigation Bar */}
       <Navbar
         activeNav={activeNav}
         setActiveNav={setActiveNav}
@@ -103,8 +107,10 @@ export default function App() {
         onNavigate={handleNavClick}
       />
 
-      {/* 3. Main Fullscreen Composition */}
-      <main className="relative z-10 flex-1 flex flex-col justify-center px-6 sm:px-10 lg:px-14 xl:px-20 max-w-[1600px] mx-auto w-full py-2 sm:py-3">
+      {/* 2. Section 1: Hero Fullscreen Composition (Existing Homepage Kept 100% Intact) */}
+      <div id="home" className="relative z-10 min-h-[calc(100vh-76px)] flex flex-col justify-center px-6 sm:px-10 lg:px-14 xl:px-20 max-w-[1600px] mx-auto w-full py-4 sm:py-6 overflow-hidden">
+        {/* Fullscreen Dark Forest Atmosphere for Hero */}
+        <BackgroundEnvironment />
         
         {/* Fullscreen Row: Hero Text & Stats (Left), Earth (Center/Back), Login Card (Right) */}
         <div className="relative flex-1 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4 my-auto">
@@ -116,7 +122,7 @@ export default function App() {
             />
           </div>
 
-          {/* CENTER: Glowing Animated Earth (Layered between hero & login card, matching reference layout) */}
+          {/* CENTER: Glowing Animated Earth (Layered between hero & login card) */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 overflow-visible lg:translate-x-[4%]">
             <div className="w-[340px] sm:w-[500px] md:w-[620px] lg:w-[760px] xl:w-[860px] pointer-events-auto">
               <AnimatedEarth onSelectFeature={handleFeatureSelect} />
@@ -130,12 +136,36 @@ export default function App() {
 
         </div>
 
-      </main>
+      </div>
 
-      {/* 4. Interactive Toast Notifications */}
+      {/* 4. Section 2: WHAT ECOTRACK DOES (New About & Feature Highlights Section) */}
+      <AboutSection onSelectFeature={handleFeatureSelect} />
+
+      {/* 5. Minimalist Premium Footer */}
+      <footer className="relative z-20 w-full border-t border-[#54F0AE]/20 bg-[#031611]/90 backdrop-blur-xl py-8 px-6 sm:px-12 text-center text-xs text-[#9EB3A8]">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <Leaf className="w-4 h-4 text-[#54F0AE]" />
+            <span className="font-bold text-white font-['Outfit'] tracking-wide">EcoTrack</span>
+            <span className="text-gray-500">|</span>
+            <span>Empowering grassroots environmental action worldwide</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <button onClick={() => handleNavClick('home')} className="hover:text-white transition-colors cursor-pointer">Home</button>
+            <button onClick={() => handleNavClick('about')} className="hover:text-white transition-colors cursor-pointer">About</button>
+            <button onClick={() => handleNavClick('features')} className="hover:text-white transition-colors cursor-pointer">Features</button>
+            <button onClick={() => handleNavClick('impact')} className="hover:text-white transition-colors cursor-pointer">Impact</button>
+          </div>
+          <div className="flex items-center gap-1">
+            <span>Built with care for a greener future</span>
+          </div>
+        </div>
+      </footer>
+
+      {/* 6. Interactive Toast Notifications */}
       <Toast toast={toast} onClose={() => setToast(null)} />
 
-      {/* 5. Feature Detail Modal */}
+      {/* 7. Feature Detail Modal */}
       <FeatureModal
         feature={selectedFeature}
         onClose={() => setSelectedFeature(null)}
@@ -143,3 +173,4 @@ export default function App() {
     </div>
   );
 }
+

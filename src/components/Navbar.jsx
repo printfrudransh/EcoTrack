@@ -14,6 +14,7 @@ export default function Navbar({
 
   const navLinks = [
     { name: 'Home', id: 'home' },
+    { name: 'About', id: 'about' },
     { name: 'Features', id: 'features' },
     { name: 'Impact', id: 'impact' },
     { name: 'Contact', id: 'contact' },
@@ -26,7 +27,7 @@ export default function Navbar({
   };
 
   return (
-    <header className="relative z-50 w-full px-6 sm:px-10 lg:px-16 py-6 transition-all duration-300">
+    <header className="sticky top-0 z-50 w-full px-6 sm:px-10 lg:px-16 py-4 bg-[#031611]/85 backdrop-blur-md border-b border-[#54F0AE]/15 transition-all duration-300">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         
         {/* Brand Logo & Name */}
